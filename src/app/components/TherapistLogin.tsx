@@ -118,7 +118,7 @@ export default function TherapistLogin() {
 
             <div className="mt-6 p-4 bg-sky-50 rounded-xl">
               <p className="text-xs text-sky-900 font-medium mb-1">Demo Credentials:</p>
-              <p className="text-xs text-sky-700">T001 / +1-555-0101 or T002 / +1-555-0102</p>
+              <p className="text-xs text-sky-700">T001 / 018 or T002 / 017</p>
             </div>
           </form>
         ) : (

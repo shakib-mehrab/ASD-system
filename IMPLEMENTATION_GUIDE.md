@@ -38,12 +38,12 @@ Open [http://localhost:5173](http://localhost:5173)
 ## 🔐 Demo Credentials
 
 ### Therapist Login
-- **Therapist 1**: ID: `T001` | Phone: `+1-555-0101`
-- **Therapist 2**: ID: `T002` | Phone: `+1-555-0102`
+- **Therapist 1**: ID: `T001` | Phone: `018`
+- **Therapist 2**: ID: `T002` | Phone: `017`
 
 ### Guardian Login (Patient ID + Guardian Phone)
-- **Patient 1**: ID: `P001` | Phone: `+1-555-1001` (Emma Johnson - Completed Onboarding)
-- **Patient 2**: ID: `P002` | Phone: `+1-555-1002` (Liam Martinez - Completed Onboarding)
+- **Patient 1**: ID: `P001` | Phone: `01` (Emma Johnson - Completed Onboarding)
+- **Patient 2**: ID: `P002` | Phone: `02` (Liam Martinez - Completed Onboarding)
 - **Patient 3**: ID: `P003` | Phone: `+1-555-1003` (Sophia Patel - Completed Onboarding)
 - **Patient 4**: ID: `P004` | Phone: `+1-555-1004` (Noah Thompson - **Needs Onboarding**)
 
@@ -55,7 +55,7 @@ Open [http://localhost:5173](http://localhost:5173)
 
 1. **Login**
    - Go to Landing Page → Select "Therapist"
-   - Enter credentials (T001 / +1-555-0101)
+   - Enter credentials (T001 / 018)
    - Enter any 4-digit OTP code
 
 2. **View Patients**

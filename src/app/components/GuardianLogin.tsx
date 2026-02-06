@@ -138,7 +138,7 @@ export function GuardianLogin() {
                 <p className="text-xs text-amber-900 font-semibold mb-2">Demo Credentials:</p>
                 <div className="space-y-1">
                   <p className="text-xs text-amber-800"><strong>Patient ID:</strong> P001, P002, P003, or P004</p>
-                  <p className="text-xs text-amber-800"><strong>Phone:</strong> +1-555-1001, +1-555-1002, +1-555-1003, or +1-555-1004</p>
+                  <p className="text-xs text-amber-800"><strong>Phone:</strong> 01, 02, +1-555-1003, or +1-555-1004</p>
                   <p className="text-xs text-amber-700 mt-2 italic">Use any 4-digit code for OTP verification</p>
                 </div>
               </div>

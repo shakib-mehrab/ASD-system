@@ -52,6 +52,16 @@ async function initializeData() {
   }
 }
 
+// Clear all cached data and force reload from JSON files
+export function clearDataCache() {
+  Object.values(STORAGE_KEYS).forEach(key => {
+    localStorage.removeItem(key);
+  });
+  // Also clear auth session
+  localStorage.removeItem('asd_auth_session');
+  console.log('✅ Data cache cleared. Refresh page to reload from JSON files.');
+}
+
 // User Management
 export async function getAllUsers() {
   await initializeData();
