@@ -30,6 +30,7 @@ export default function PatientVRInterface() {
   const [heartRate, setHeartRate] = useState(85);
   const [focusLevel, setFocusLevel] = useState(78);
   const [engagement, setEngagement] = useState(82);
+  const [showSummary, setShowSummary] = useState(false);
 
   // Session timer
   useEffect(() => {
@@ -58,7 +59,11 @@ export default function PatientVRInterface() {
   };
 
   const handleExit = () => {
-    navigate('/patient/adaptive-guidance');
+    setShowSummary(true);
+  };
+
+  const handleBackToDashboard = () => {
+    navigate('/guardian/dashboard');
   };
 
   return (
@@ -210,6 +215,115 @@ export default function PatientVRInterface() {
           <div className="absolute bottom-0 right-0 w-32 h-32 border-b-4 border-r-4 border-white/20 rounded-br-3xl" />
         </div>
       </div>
+
+      {/* Session Completion Summary Modal - Guardian Friendly */}
+      {showSummary && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="text-center mb-6">
+              <div className="w-20 h-20 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <TrendingUp className="w-10 h-10 text-white" />
+              </div>
+              <h2 className="text-3xl font-bold text-slate-900 mb-2">Great Session!</h2>
+              <p className="text-lg text-slate-600">Here's how your child did today</p>
+            </div>
+
+            {/* Session Overview */}
+            <div className="bg-gradient-to-r from-sky-50 to-blue-50 rounded-xl p-6 mb-6 border border-sky-200">
+              <h3 className="font-semibold text-slate-900 mb-4 text-lg">Session Summary</h3>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-white rounded-lg p-4">
+                  <div className="text-3xl font-bold text-sky-600 mb-1">
+                    {Math.floor(sessionTime / 60)} min {sessionTime % 60} sec
+                  </div>
+                  <div className="text-sm text-slate-600">Practice Time</div>
+                </div>
+                <div className="bg-white rounded-lg p-4">
+                  <div className="text-3xl font-bold text-emerald-600 mb-1">{sceneData.name}</div>
+                  <div className="text-sm text-slate-600">Activity</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Performance Metrics - Simple Language */}
+            <div className="space-y-4 mb-6">
+              <h3 className="font-semibold text-slate-900 text-lg">How They Did</h3>
+              
+              {/* Focus */}
+              <div className="bg-purple-50 rounded-xl p-4 border border-purple-200">
+                <div className="flex items-start justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <Brain className="w-5 h-5 text-purple-600" />
+                    <span className="font-semibold text-slate-900">Attention & Focus</span>
+                  </div>
+                  <span className="text-2xl font-bold text-purple-600">{focusLevel}%</span>
+                </div>
+                <p className="text-sm text-slate-700">
+                  {focusLevel >= 80 ? 
+                    "Excellent! Your child stayed focused throughout the session." :
+                    focusLevel >= 60 ?
+                    "Good work! They maintained decent attention during activities." :
+                    "They tried their best today. Focus can improve with more practice."}
+                </p>
+              </div>
+
+              {/* Engagement */}
+              <div className="bg-emerald-50 rounded-xl p-4 border border-emerald-200">
+                <div className="flex items-start justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <Activity className="w-5 h-5 text-emerald-600" />
+                    <span className="font-semibold text-slate-900">Participation</span>
+                  </div>
+                  <span className="text-2xl font-bold text-emerald-600">{engagement}%</span>
+                </div>
+                <p className="text-sm text-slate-700">
+                  {engagement >= 80 ? 
+                    "Amazing! They were actively involved and enjoying the experience." :
+                    engagement >= 60 ?
+                    "They participated well and showed interest in the activities." :
+                    "Keep encouraging them! Engagement will grow with time."}
+                </p>
+              </div>
+
+              {/* Comfort Level */}
+              <div className="bg-sky-50 rounded-xl p-4 border border-sky-200">
+                <div className="flex items-start justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <Heart className="w-5 h-5 text-sky-600" />
+                    <span className="font-semibold text-slate-900">Comfort Level</span>
+                  </div>
+                  <span className="text-2xl font-bold text-sky-600">
+                    {heartRate <= 90 ? 'Relaxed' : heartRate <= 100 ? 'Normal' : 'Excited'}
+                  </span>
+                </div>
+                <p className="text-sm text-slate-700">
+                  {heartRate <= 90 ? 
+                    "They felt comfortable and relaxed during the session." :
+                    heartRate <= 100 ?
+                    "Normal energy levels - they were engaged but calm." :
+                    "High energy today! This is normal during exciting activities."}
+                </p>
+              </div>
+            </div>
+
+            {/* Encouragement Message */}
+            <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl p-4 mb-6 border border-amber-200">
+              <p className="text-sm text-slate-700 leading-relaxed">
+                <strong className="text-amber-900">Keep it up!</strong> Regular practice helps build skills and confidence. 
+                Consider trying this activity again in a few days to reinforce learning.
+              </p>
+            </div>
+
+            {/* Action Button */}
+            <button
+              onClick={handleBackToDashboard}
+              className="w-full py-4 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white rounded-xl font-semibold text-lg transition-all shadow-lg"
+            >
+              Back to Dashboard
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

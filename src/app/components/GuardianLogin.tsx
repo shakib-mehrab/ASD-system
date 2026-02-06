@@ -133,6 +133,15 @@ export function GuardianLogin() {
               >
                 {isLoading ? 'Sending Code...' : 'Send Verification Code'}
               </Button>
+
+              <div className="mt-4 p-4 bg-amber-50 rounded-xl border border-amber-200">
+                <p className="text-xs text-amber-900 font-semibold mb-2">Demo Credentials:</p>
+                <div className="space-y-1">
+                  <p className="text-xs text-amber-800"><strong>Patient ID:</strong> P001, P002, P003, or P004</p>
+                  <p className="text-xs text-amber-800"><strong>Phone:</strong> +1-555-1001, +1-555-1002, +1-555-1003, or +1-555-1004</p>
+                  <p className="text-xs text-amber-700 mt-2 italic">Use any 4-digit code for OTP verification</p>
+                </div>
+              </div>
             </form>
           ) : (
             <form onSubmit={handleVerifyOTP} className="space-y-6">
@@ -187,11 +196,11 @@ export function GuardianLogin() {
             </form>
           )}
 
-          <div className="mt-6 pt-6 border-t border-gray-200">
+          {/* <div className="mt-6 pt-6 border-t border-gray-200">
             <p className="text-center text-sm text-gray-600">
               For demo: Use any Patient ID (P001-P004) with their guardian phone from registration
             </p>
-          </div>
+          </div> */}
         </Card>
       </div>
     </div>

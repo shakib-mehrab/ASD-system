@@ -18,7 +18,10 @@ import {
   Zap,
   Target,
   Users,
-  MessageSquare
+  MessageSquare,
+  CheckCircle2,
+  ArrowLeft,
+  RotateCw
 } from 'lucide-react';
 import { Card } from './ui/card';
 import { Progress } from './ui/progress';
@@ -30,6 +33,21 @@ export default function TherapistVRInterface() {
   const patientData = location.state?.patient || {
     id: 'P001',
     name: 'Emma Johnson'
+  };
+  const sceneData = location.state?.scene || {
+    id: 'grocery',
+    name: 'Grocery Store',
+    icon: '🛒',
+    difficulty: 'Medium',
+    description: 'Practice shopping and social interactions'
+  };
+  const preferences = location.state?.preferences || {
+    soundLevel: 50,
+    brightness: 70,
+    crowdDensity: 30,
+    duration: 20,
+    enableGuidance: true,
+    enableRewards: true
   };
 
   const [isPaused, setIsPaused] = useState(false);
@@ -83,11 +101,25 @@ export default function TherapistVRInterface() {
     return 'text-rose-500';
   };
 
+  const handleEndSession = () => {
+    setShowSummary(true);
+  };
+
+  const handleStartAgain = () => {
+    // Reset session
+    setSessionTime(0);
+    setCompletedTasks(0);
+    setShowSummary(false);
+    setIsPaused(false);
+  };
+
+  const handleBackToDashboard = () => {
+    navigate('/therapist/patient-detail', { state: { patient: patientData } });
+  };
+
   return (
     <div className="min-h-screen bg-slate-900">
-      <DemoNav />
-      
-      <div className="flex h-[calc(100vh-80px)]">
+      <div className="flex h-screen">
         {/* Main VR Viewport - 70% */}
         <div className="flex-1 relative bg-gradient-to-b from-sky-400 via-sky-300 to-emerald-200">
           {/* Grid overlay */}
@@ -157,7 +189,7 @@ export default function TherapistVRInterface() {
                 <div className="h-10 w-px bg-white/20" />
 
                 <button
-                  onClick={() => navigate('/therapist/patients')}
+                  onClick={handleEndSession}
                   className="px-8 h-14 bg-gradient-to-br from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white rounded-2xl flex items-center gap-3 transition-all shadow-lg font-semibold"
                 >
                   <Square className="w-5 h-5" />
@@ -335,4 +367,89 @@ export default function TherapistVRInterface() {
                 Adjust Scenario
               </button>
             </div>
-          <
+          </div>
+        </div>
+      </div>
+
+      {/* Session Summary Modal */}
+      {showSummary && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <Card className="bg-slate-900 border-slate-700 p-6 max-w-lg w-full max-h-[90vh] overflow-y-auto">
+            <div className="text-center mb-4">
+              <div className="w-12 h-12 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                <CheckCircle2 className="w-8 h-8 text-emerald-400" />
+              </div>
+              <h2 className="text-xl font-bold text-white mb-1">Session Completed</h2>
+              <p className="text-sm text-slate-400">{sceneData.name}</p>
+            </div>
+
+            {/* Session Stats */}
+            <div className="grid grid-cols-2 gap-3 mb-4">
+              <div className="bg-slate-800/50 rounded-lg p-3 text-center">
+                <div className="text-2xl font-bold text-sky-400 mb-1">
+                  {Math.floor(sessionTime / 60)}:{String(sessionTime % 60).padStart(2, '0')}
+                </div>
+                <div className="text-xs text-slate-400">Session Duration</div>
+              </div>
+              <div className="bg-slate-800/50 rounded-lg p-3 text-center">
+                <div className="text-2xl font-bold text-emerald-400 mb-1">3/8</div>
+                <div className="text-xs text-slate-400">Tasks Completed</div>
+              </div>
+            </div>
+
+            {/* Biometric Averages */}
+            <div className="space-y-2 mb-4">
+              <div className="flex items-center justify-between bg-slate-800/30 rounded-lg p-2">
+                <span className="text-slate-300 text-xs">Average Heart Rate</span>
+                <span className="text-white text-sm font-semibold">{heartRate} BPM</span>
+              </div>
+              <div className="flex items-center justify-between bg-slate-800/30 rounded-lg p-2">
+                <span className="text-slate-300 text-xs">Average Focus Level</span>
+                <span className="text-white text-sm font-semibold">{focusLevel}%</span>
+              </div>
+              <div className="flex items-center justify-between bg-slate-800/30 rounded-lg p-2">
+                <span className="text-slate-300 text-xs">Average Engagement</span>
+                <span className="text-white text-sm font-semibold">{engagement}%</span>
+              </div>
+              <div className="flex items-center justify-between bg-slate-800/30 rounded-lg p-2">
+                <span className="text-slate-300 text-xs">Stress Level</span>
+                <span className="text-white text-sm font-semibold">Low</span>
+              </div>
+            </div>
+
+            {/* Key Insights */}
+            <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-3 mb-4">
+              <h3 className="text-emerald-400 text-sm font-semibold mb-2 flex items-center gap-2">
+                <TrendingUp className="w-3 h-3" />
+                Key Achievements
+              </h3>
+              <ul className="space-y-1 text-xs text-slate-300">
+                <li>• Successfully maintained eye contact during interactions</li>
+                <li>• Completed navigation tasks with minimal assistance</li>
+                <li>• Showed improved comfort with social interactions</li>
+              </ul>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex gap-2">
+              <button
+                onClick={handleBackToDashboard}
+                className="flex-1 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white text-sm rounded-lg transition-all flex items-center justify-center gap-2 font-medium"
+              >
+                <ArrowLeft className="w-3 h-3" />
+                Back to Dashboard
+              </button>
+              <button
+                onClick={handleStartAgain}
+                className="flex-1 px-6 py-3 bg-gradient-to-r from-sky-600 to-purple-600 hover:from-sky-700 hover:to-purple-700 text-white rounded-lg transition-all flex items-center justify-center gap-2 font-medium"
+              >
+                <RotateCw className="w-4 h-4" />
+                Start Again
+              </button>
+            </div>
+          </Card>
+        </div>
+      )}
+    </div>
+  );
+}

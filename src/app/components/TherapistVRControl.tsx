@@ -473,4 +473,19 @@ export function TherapistVRControl() {
                         <Textarea
                           value={therapistNotes}
                           onChange={(e) => setTherapistNotes(e.target.value)}
-                          placeholder="Obs
+                          placeholder="Observations, behaviors, recommendations..."
+                          className="mt-2"
+                          rows={4}
+                        />
+                      </div>
+                    </div>
+                  </Card>
+                )}
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+    </DashboardLayout>
+  );
+}

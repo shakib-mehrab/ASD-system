@@ -20,7 +20,9 @@ import {
   Clock,
   Sparkles,
   Target,
-  CheckCircle
+  CheckCircle,
+  Wifi,
+  Battery
 } from 'lucide-react';
 
 export function GuardianPractice() {
@@ -31,6 +33,9 @@ export function GuardianPractice() {
   const [selectedScene, setSelectedScene] = useState<VRScene | null>(null);
   const [loading, setLoading] = useState(true);
   const [showCustomize, setShowCustomize] = useState(false);
+  const [showStartModal, setShowStartModal] = useState(false);
+  const [deviceConnected, setDeviceConnected] = useState(true);
+  const [deviceBattery, setDeviceBattery] = useState(85);
 
   // Practice preferences
   const [preferences, setPreferences] = useState({
@@ -75,15 +80,21 @@ export function GuardianPractice() {
 
   const handleStartPractice = () => {
     if (!selectedScene) return;
+    setShowStartModal(true);
+  };
+
+  const confirmStartSession = () => {
+    if (!selectedScene) return;
     
-    // Store practice settings in sessionStorage for the VR session
-    sessionStorage.setItem('practiceSettings', JSON.stringify({
-      sceneId: selectedScene.id,
-      preferences,
-      isHomeSession: true
-    }));
-    
-    navigate('/patient/session-start');
+    // Navigate directly to VR interface with all settings
+    navigate('/patient/vr-interface', {
+      state: {
+        scene: selectedScene,
+        preferences,
+        patient,
+        isHomeSession: true
+      }
+    });
   };
 
   const isRecommended = (sceneId: string) => {
@@ -401,6 +412,122 @@ export function GuardianPractice() {
             </Card>
           </div>
         </div>
+
+        {/* Session Start Modal */}
+        {showStartModal && selectedScene && (
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+            <Card className="bg-white p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+              <div className="text-center mb-6">
+                <div className="w-16 h-16 bg-gradient-to-br from-amber-500 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Play className="w-8 h-8 text-white" />
+                </div>
+                <h2 className="text-2xl font-bold text-slate-900 mb-2">Ready to Start?</h2>
+                <p className="text-slate-600">Review session details before beginning</p>
+              </div>
+
+              {/* Session Information */}
+              <div className="space-y-4 mb-6">
+                <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl p-4 border border-amber-200">
+                  <h3 className="font-semibold text-slate-900 mb-3 flex items-center gap-2">
+                    <Target className="w-5 h-5 text-amber-600" />
+                    Session Details
+                  </h3>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-slate-600">Scene:</span>
+                      <span className="font-semibold text-slate-900">{selectedScene.name}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-slate-600">Duration:</span>
+                      <span className="font-semibold text-slate-900">{preferences.duration} minutes</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-slate-600">Difficulty:</span>
+                      <span className="font-semibold text-slate-900">{selectedScene.difficulty}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Device Status */}
+                <div className="bg-slate-50 rounded-xl p-4 border border-slate-200">
+                  <h3 className="font-semibold text-slate-900 mb-3 flex items-center gap-2">
+                    <Settings className="w-5 h-5 text-slate-600" />
+                    Device Status
+                  </h3>
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-slate-600">Connection</span>
+                      <div className="flex items-center gap-2">
+                        <div className={`w-2 h-2 rounded-full ${deviceConnected ? 'bg-emerald-500' : 'bg-red-500'} animate-pulse`} />
+                        <span className={`text-sm font-semibold ${deviceConnected ? 'text-emerald-600' : 'text-red-600'}`}>
+                          {deviceConnected ? 'Connected' : 'Disconnected'}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-slate-600">Battery Level</span>
+                      <div className="flex items-center gap-2">
+                        <div className="w-24 h-2 bg-slate-200 rounded-full overflow-hidden">
+                          <div 
+                            className={`h-full rounded-full ${
+                              deviceBattery > 50 ? 'bg-emerald-500' : 
+                              deviceBattery > 20 ? 'bg-amber-500' : 'bg-red-500'
+                            }`}
+                            style={{ width: `${deviceBattery}%` }}
+                          />
+                        </div>
+                        <span className="text-sm font-semibold text-slate-900">{deviceBattery}%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Settings Summary */}
+                <div className="bg-purple-50 rounded-xl p-4 border border-purple-200">
+                  <h3 className="font-semibold text-slate-900 mb-3 flex items-center gap-2">
+                    <Sparkles className="w-5 h-5 text-purple-600" />
+                    Active Settings
+                  </h3>
+                  <div className="grid grid-cols-2 gap-3 text-sm">
+                    <div className="flex items-center gap-2">
+                      {preferences.enableGuidance ? <CheckCircle className="w-4 h-4 text-emerald-500" /> : <div className="w-4 h-4" />}
+                      <span className="text-slate-700">Voice Guidance</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      {preferences.enableRewards ? <CheckCircle className="w-4 h-4 text-emerald-500" /> : <div className="w-4 h-4" />}
+                      <span className="text-slate-700">Rewards</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-slate-600">Sound: {preferences.soundLevel}%</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-slate-600">Brightness: {preferences.brightness}%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex gap-3">
+                <Button
+                  onClick={() => setShowStartModal(false)}
+                  variant="outline"
+                  className="flex-1 h-12"
+                >
+                  Cancel
+                </Button>
+                <Button
+                  onClick={confirmStartSession}
+                  disabled={!deviceConnected}
+                  className="flex-1 h-12 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white"
+                >
+                  <Play className="w-5 h-5 mr-2" />
+                  Start Now
+                </Button>
+              </div>
+            </Card>
+          </div>
+        )}
       </div>
     </DashboardLayout>
   );
