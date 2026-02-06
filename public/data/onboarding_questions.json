@@ -1,0 +1,184 @@
+{
+  "questions": [
+    {
+      "id": "Q001",
+      "category": "social_interaction",
+      "question": "How does your child typically respond to social greetings (e.g., waving, saying hello)?",
+      "options": [
+        { "value": "responds_consistently", "label": "Responds consistently and appropriately", "score": 5 },
+        { "value": "responds_sometimes", "label": "Responds sometimes with prompting", "score": 3 },
+        { "value": "rarely_responds", "label": "Rarely or never responds", "score": 1 }
+      ],
+      "recommendedScenes": {
+        "responds_consistently": ["VR005", "VR008"],
+        "responds_sometimes": ["VR001", "VR005"],
+        "rarely_responds": ["VR001", "VR004"]
+      }
+    },
+    {
+      "id": "Q002",
+      "category": "eye_contact",
+      "question": "How often does your child make eye contact during conversations?",
+      "options": [
+        { "value": "frequent", "label": "Frequently and comfortably", "score": 5 },
+        { "value": "occasional", "label": "Occasionally, but seems uncomfortable", "score": 3 },
+        { "value": "avoids", "label": "Actively avoids eye contact", "score": 1 }
+      ],
+      "recommendedScenes": {
+        "frequent": ["VR002", "VR005"],
+        "occasional": ["VR002", "VR004"],
+        "avoids": ["VR002", "VR010"]
+      }
+    },
+    {
+      "id": "Q003",
+      "category": "sensory",
+      "question": "How does your child react to loud or unexpected noises?",
+      "options": [
+        { "value": "tolerates_well", "label": "Tolerates well, minimal distress", "score": 5 },
+        { "value": "shows_discomfort", "label": "Shows discomfort, covers ears", "score": 3 },
+        { "value": "severe_distress", "label": "Severe distress, meltdowns", "score": 1 }
+      ],
+      "recommendedScenes": {
+        "tolerates_well": ["VR001", "VR006"],
+        "shows_discomfort": ["VR003", "VR009"],
+        "severe_distress": ["VR003", "VR010"]
+      }
+    },
+    {
+      "id": "Q004",
+      "category": "communication",
+      "question": "How does your child express their needs or wants?",
+      "options": [
+        { "value": "verbal_clear", "label": "Uses clear verbal communication", "score": 5 },
+        { "value": "gestures_words", "label": "Combination of gestures and words", "score": 3 },
+        { "value": "nonverbal_only", "label": "Primarily nonverbal (pointing, leading)", "score": 1 }
+      ],
+      "recommendedScenes": {
+        "verbal_clear": ["VR005", "VR008"],
+        "gestures_words": ["VR004", "VR007"],
+        "nonverbal_only": ["VR004", "VR010"]
+      }
+    },
+    {
+      "id": "Q005",
+      "category": "emotion_regulation",
+      "question": "How does your child handle transitions between activities?",
+      "options": [
+        { "value": "handles_smoothly", "label": "Handles smoothly with minimal support", "score": 5 },
+        { "value": "needs_warning", "label": "Needs advance warning and support", "score": 3 },
+        { "value": "extreme_difficulty", "label": "Extreme difficulty, frequent meltdowns", "score": 1 }
+      ],
+      "recommendedScenes": {
+        "handles_smoothly": ["VR006", "VR008"],
+        "needs_warning": ["VR007", "VR009"],
+        "extreme_difficulty": ["VR009", "VR010"]
+      }
+    },
+    {
+      "id": "Q006",
+      "category": "sensory",
+      "question": "Does your child have sensitivity to bright lights or visual stimulation?",
+      "options": [
+        { "value": "no_sensitivity", "label": "No noticeable sensitivity", "score": 5 },
+        { "value": "mild_sensitivity", "label": "Mild sensitivity, squints or looks away", "score": 3 },
+        { "value": "severe_sensitivity", "label": "Severe sensitivity, avoids bright spaces", "score": 1 }
+      ],
+      "recommendedScenes": {
+        "no_sensitivity": ["VR001", "VR006"],
+        "mild_sensitivity": ["VR003", "VR009"],
+        "severe_sensitivity": ["VR010"]
+      }
+    },
+    {
+      "id": "Q007",
+      "category": "social_interaction",
+      "question": "How does your child interact with peers in group settings?",
+      "options": [
+        { "value": "engages_actively", "label": "Engages actively and initiates play", "score": 5 },
+        { "value": "parallel_play", "label": "Engages in parallel play, limited interaction", "score": 3 },
+        { "value": "avoids_others", "label": "Avoids or ignores other children", "score": 1 }
+      ],
+      "recommendedScenes": {
+        "engages_actively": ["VR005", "VR006"],
+        "parallel_play": ["VR001", "VR008"],
+        "avoids_others": ["VR004", "VR010"]
+      }
+    },
+    {
+      "id": "Q008",
+      "category": "focus_attention",
+      "question": "How long can your child focus on a structured activity?",
+      "options": [
+        { "value": "extended", "label": "10+ minutes without difficulty", "score": 5 },
+        { "value": "moderate", "label": "5-10 minutes with occasional redirection", "score": 3 },
+        { "value": "limited", "label": "Less than 5 minutes, constant redirection needed", "score": 1 }
+      ],
+      "recommendedScenes": {
+        "extended": ["VR007", "VR008"],
+        "moderate": ["VR006", "VR009"],
+        "limited": ["VR009", "VR010"]
+      }
+    },
+    {
+      "id": "Q009",
+      "category": "repetitive_behaviors",
+      "question": "Does your child engage in repetitive movements or behaviors (stimming)?",
+      "options": [
+        { "value": "minimal", "label": "Minimal or infrequent", "score": 5 },
+        { "value": "moderate", "label": "Moderate, especially when stressed", "score": 3 },
+        { "value": "frequent", "label": "Frequent, impacts daily activities", "score": 1 }
+      ],
+      "recommendedScenes": {
+        "minimal": ["VR005", "VR006"],
+        "moderate": ["VR003", "VR009"],
+        "frequent": ["VR009", "VR010"]
+      }
+    },
+    {
+      "id": "Q010",
+      "category": "new_environments",
+      "question": "How does your child respond to new or unfamiliar environments?",
+      "options": [
+        { "value": "adapts_quickly", "label": "Adapts quickly with curiosity", "score": 5 },
+        { "value": "cautious_gradual", "label": "Cautious but gradually adapts", "score": 3 },
+        { "value": "extreme_anxiety", "label": "Extreme anxiety or refusal to enter", "score": 1 }
+      ],
+      "recommendedScenes": {
+        "adapts_quickly": ["VR001", "VR006"],
+        "cautious_gradual": ["VR003", "VR007"],
+        "extreme_anxiety": ["VR010"]
+      }
+    },
+    {
+      "id": "Q011",
+      "category": "following_instructions",
+      "question": "How well does your child follow simple verbal instructions?",
+      "options": [
+        { "value": "follows_easily", "label": "Follows easily without repetition", "score": 5 },
+        { "value": "needs_repetition", "label": "Needs repetition or visual cues", "score": 3 },
+        { "value": "difficulty_following", "label": "Significant difficulty following instructions", "score": 1 }
+      ],
+      "recommendedScenes": {
+        "follows_easily": ["VR007", "VR008"],
+        "needs_repetition": ["VR004", "VR007"],
+        "difficulty_following": ["VR004", "VR010"]
+      }
+    },
+    {
+      "id": "Q012",
+      "category": "emotional_expression",
+      "question": "Can your child identify and express their emotions?",
+      "options": [
+        { "value": "expresses_clearly", "label": "Expresses clearly using words or gestures", "score": 5 },
+        { "value": "limited_expression", "label": "Limited expression, needs prompting", "score": 3 },
+        { "value": "difficulty_expressing", "label": "Great difficulty identifying or expressing emotions", "score": 1 }
+      ],
+      "recommendedScenes": {
+        "expresses_clearly": ["VR005", "VR008"],
+        "limited_expression": ["VR004", "VR007"],
+        "difficulty_expressing": ["VR004", "VR010"]
+      }
+    }
+  ]
+}

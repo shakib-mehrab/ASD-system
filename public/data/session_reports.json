@@ -1,0 +1,137 @@
+{
+  "reports": [
+    {
+      "id": "SR001",
+      "patientId": "P001",
+      "therapistId": "T001",
+      "sceneId": "VR002",
+      "sessionDate": "2026-01-15T10:00:00Z",
+      "duration": 10,
+      "completionStatus": "completed",
+      "environmentSettings": {
+        "characterDistance": 3,
+        "characterExpressions": "friendly",
+        "backgroundDistraction": 10
+      },
+      "abaData": {
+        "targetBehavior": "Maintaining eye contact",
+        "measurementType": "duration",
+        "baseline": 2.5,
+        "achieved": 5.8,
+        "unit": "seconds",
+        "promptsUsed": ["verbal", "gestural"],
+        "independentTrials": 6,
+        "promptedTrials": 4,
+        "percentageIndependent": 60
+      },
+      "behavioralObservations": {
+        "positiveResponses": 8,
+        "challengingBehaviors": 2,
+        "emotionalState": "calm",
+        "engagementLevel": "high"
+      },
+      "therapistNotes": "Emma showed significant improvement in maintaining eye contact. Started with verbal prompts but became more independent by end of session.",
+      "recommendationsForNext": "Gradually increase character distance to 4 meters. Introduce varied expressions."
+    },
+    {
+      "id": "SR002",
+      "patientId": "P001",
+      "therapistId": "T001",
+      "sceneId": "VR003",
+      "sessionDate": "2026-01-22T10:30:00Z",
+      "duration": 12,
+      "completionStatus": "completed",
+      "environmentSettings": {
+        "soundLevel": 35,
+        "lightingBrightness": 45,
+        "studentCount": 12,
+        "sensoryTriggers": "minimal"
+      },
+      "abaData": {
+        "targetBehavior": "Tolerating sensory input",
+        "measurementType": "latency",
+        "baseline": 45,
+        "achieved": 28,
+        "unit": "seconds_to_distress",
+        "promptsUsed": ["environmental_modification"],
+        "independentTrials": 5,
+        "promptedTrials": 3,
+        "percentageIndependent": 62.5
+      },
+      "behavioralObservations": {
+        "positiveResponses": 7,
+        "challengingBehaviors": 3,
+        "emotionalState": "slightly_anxious",
+        "engagementLevel": "moderate"
+      },
+      "therapistNotes": "Emma tolerated classroom sounds better than expected. Used calming tools twice. Good progress on sensory desensitization.",
+      "recommendationsForNext": "Increase sound level to 40 gradually. Add more students to classroom."
+    },
+    {
+      "id": "SR003",
+      "patientId": "P002",
+      "therapistId": "T002",
+      "sceneId": "VR005",
+      "sessionDate": "2026-01-18T14:00:00Z",
+      "duration": 15,
+      "completionStatus": "completed",
+      "environmentSettings": {
+        "peerCount": 6,
+        "activityType": "structured",
+        "conflictLevel": 20
+      },
+      "abaData": {
+        "targetBehavior": "Appropriate social responses",
+        "measurementType": "frequency",
+        "baseline": 3,
+        "achieved": 8,
+        "unit": "correct_responses",
+        "promptsUsed": ["modeling", "verbal"],
+        "independentTrials": 8,
+        "promptedTrials": 4,
+        "percentageIndependent": 66.7
+      },
+      "behavioralObservations": {
+        "positiveResponses": 10,
+        "challengingBehaviors": 1,
+        "emotionalState": "positive",
+        "engagementLevel": "high"
+      },
+      "therapistNotes": "Liam demonstrated excellent turn-taking skills. Initiated play with peers independently 3 times. Minimal anxiety observed.",
+      "recommendationsForNext": "Introduce free play scenario. Increase peer count to 8."
+    },
+    {
+      "id": "SR004",
+      "patientId": "P003",
+      "therapistId": "T001",
+      "sceneId": "VR010",
+      "sessionDate": "2026-01-25T11:00:00Z",
+      "duration": 8,
+      "completionStatus": "completed",
+      "environmentSettings": {
+        "stimulationLevel": 10,
+        "environmentType": "nature",
+        "interactivity": "minimal"
+      },
+      "abaData": {
+        "targetBehavior": "Tolerating VR environment",
+        "measurementType": "duration",
+        "baseline": 3,
+        "achieved": 8,
+        "unit": "minutes",
+        "promptsUsed": ["full_support"],
+        "independentTrials": 1,
+        "promptedTrials": 0,
+        "percentageIndependent": 100
+      },
+      "behavioralObservations": {
+        "positiveResponses": 5,
+        "challengingBehaviors": 0,
+        "emotionalState": "calm",
+        "engagementLevel": "moderate"
+      },
+      "therapistNotes": "Sophia's first VR session. She adapted well to the headset and remained calm throughout. Used guided breathing feature successfully.",
+      "recommendationsForNext": "Maintain same low stimulation. Gradually introduce minimal interactivity."
+    }
+  ]
+}

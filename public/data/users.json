@@ -1,0 +1,124 @@
+{
+  "therapists": [
+    {
+      "id": "T001",
+      "name": "Dr. Sarah Chen",
+      "phone": "+1-555-0101",
+      "role": "therapist",
+      "specialization": "Pediatric ASD Therapy",
+      "yearsExperience": 8,
+      "email": "sarah.chen@therapy.com"
+    },
+    {
+      "id": "T002",
+      "name": "Dr. Michael Rodriguez",
+      "phone": "+1-555-0102",
+      "role": "therapist",
+      "specialization": "Behavioral Analysis",
+      "yearsExperience": 12,
+      "email": "michael.rodriguez@therapy.com"
+    }
+  ],
+  "patients": [
+    {
+      "id": "P001",
+      "name": "Emma Johnson",
+      "dateOfBirth": "2018-03-15",
+      "age": 7,
+      "guardianName": "Jennifer Johnson",
+      "guardianPhone": "+1-555-1001",
+      "guardianEmail": "jennifer.j@email.com",
+      "primaryDiagnosis": "Autism Spectrum Disorder (Level 2)",
+      "secondaryDiagnosis": "Sensory Processing Disorder",
+      "assignedTherapist": "T001",
+      "enrollmentDate": "2024-06-15",
+      "therapyGoals": [
+        "Improve social interaction skills",
+        "Reduce sensory sensitivities",
+        "Enhance eye contact duration"
+      ],
+      "sensoryProfile": {
+        "soundSensitivity": "high",
+        "visualSensitivity": "medium",
+        "tactileSensitivity": "high",
+        "preferredEnvironments": ["quiet", "dim-lighting"]
+      },
+      "hasCompletedOnboarding": true
+    },
+    {
+      "id": "P002",
+      "name": "Liam Martinez",
+      "dateOfBirth": "2017-08-22",
+      "age": 8,
+      "guardianName": "Carlos Martinez",
+      "guardianPhone": "+1-555-1002",
+      "guardianEmail": "carlos.m@email.com",
+      "primaryDiagnosis": "Autism Spectrum Disorder (Level 1)",
+      "secondaryDiagnosis": "Anxiety Disorder",
+      "assignedTherapist": "T002",
+      "enrollmentDate": "2024-09-01",
+      "therapyGoals": [
+        "Manage anxiety in social settings",
+        "Improve verbal communication",
+        "Practice turn-taking skills"
+      ],
+      "sensoryProfile": {
+        "soundSensitivity": "medium",
+        "visualSensitivity": "low",
+        "tactileSensitivity": "medium",
+        "preferredEnvironments": ["structured", "predictable"]
+      },
+      "hasCompletedOnboarding": true
+    },
+    {
+      "id": "P003",
+      "name": "Sophia Patel",
+      "dateOfBirth": "2019-01-10",
+      "age": 7,
+      "guardianName": "Priya Patel",
+      "guardianPhone": "+1-555-1003",
+      "guardianEmail": "priya.p@email.com",
+      "primaryDiagnosis": "Autism Spectrum Disorder (Level 2)",
+      "secondaryDiagnosis": "Apraxia of Speech",
+      "assignedTherapist": "T001",
+      "enrollmentDate": "2025-01-20",
+      "therapyGoals": [
+        "Develop nonverbal communication skills",
+        "Increase comfort with new environments",
+        "Reduce self-stimulatory behaviors"
+      ],
+      "sensoryProfile": {
+        "soundSensitivity": "high",
+        "visualSensitivity": "high",
+        "tactileSensitivity": "medium",
+        "preferredEnvironments": ["quiet", "minimal-stimulation"]
+      },
+      "hasCompletedOnboarding": true
+    },
+    {
+      "id": "P004",
+      "name": "Noah Thompson",
+      "dateOfBirth": "2018-11-05",
+      "age": 7,
+      "guardianName": "Amanda Thompson",
+      "guardianPhone": "+1-555-1004",
+      "guardianEmail": "amanda.t@email.com",
+      "primaryDiagnosis": "Autism Spectrum Disorder (Level 1)",
+      "secondaryDiagnosis": "ADHD",
+      "assignedTherapist": "T002",
+      "enrollmentDate": "2025-11-10",
+      "therapyGoals": [
+        "Improve focus and attention span",
+        "Practice emotional regulation",
+        "Enhance peer interaction skills"
+      ],
+      "sensoryProfile": {
+        "soundSensitivity": "low",
+        "visualSensitivity": "medium",
+        "tactileSensitivity": "low",
+        "preferredEnvironments": ["active", "engaging"]
+      },
+      "hasCompletedOnboarding": false
+    }
+  ]
+}

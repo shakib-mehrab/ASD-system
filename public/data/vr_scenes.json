@@ -1,0 +1,432 @@
+{
+  "scenes": [
+    {
+      "id": "VR001",
+      "name": "Supermarket Interaction",
+      "description": "Practice navigating a busy supermarket, making eye contact with shoppers, and asking for help from store employees.",
+      "category": "social_skills",
+      "difficulty": "medium",
+      "duration": 15,
+      "targetSkills": ["social_interaction", "eye_contact", "verbal_communication"],
+      "abaParameters": {
+        "targetBehavior": "Initiating social interaction",
+        "measurementType": "frequency",
+        "promptLevels": ["full_physical", "partial_physical", "gestural", "verbal", "independent"]
+      },
+      "environmentSettings": {
+        "crowdDensity": {
+          "min": 0,
+          "max": 100,
+          "default": 50,
+          "unit": "percentage"
+        },
+        "soundLevel": {
+          "min": 0,
+          "max": 100,
+          "default": 60,
+          "unit": "decibels"
+        },
+        "lightingBrightness": {
+          "min": 0,
+          "max": 100,
+          "default": 75,
+          "unit": "percentage"
+        },
+        "timeOfDay": {
+          "options": ["morning", "afternoon", "evening"],
+          "default": "afternoon"
+        }
+      },
+      "preferences": {
+        "movementSpeed": {
+          "min": 0.5,
+          "max": 2.0,
+          "default": 1.0,
+          "unit": "multiplier"
+        },
+        "uiSimplification": {
+          "options": ["minimal", "moderate", "high"],
+          "default": "moderate"
+        }
+      }
+    },
+    {
+      "id": "VR002",
+      "name": "Eye Contact Trainer",
+      "description": "Gradual exposure therapy for maintaining eye contact with virtual characters in comfortable, low-pressure scenarios.",
+      "category": "communication",
+      "difficulty": "easy",
+      "duration": 10,
+      "targetSkills": ["eye_contact", "emotional_recognition"],
+      "abaParameters": {
+        "targetBehavior": "Maintaining eye contact",
+        "measurementType": "duration",
+        "promptLevels": ["verbal", "gestural", "independent"]
+      },
+      "environmentSettings": {
+        "characterDistance": {
+          "min": 1,
+          "max": 5,
+          "default": 3,
+          "unit": "meters"
+        },
+        "characterExpressions": {
+          "options": ["neutral", "friendly", "varied"],
+          "default": "friendly"
+        },
+        "backgroundDistraction": {
+          "min": 0,
+          "max": 100,
+          "default": 10,
+          "unit": "percentage"
+        }
+      },
+      "preferences": {
+        "sessionBreaks": {
+          "options": ["none", "short", "frequent"],
+          "default": "short"
+        },
+        "encouragementLevel": {
+          "min": 0,
+          "max": 100,
+          "default": 70,
+          "unit": "percentage"
+        }
+      }
+    },
+    {
+      "id": "VR003",
+      "name": "Sensory Classroom",
+      "description": "Controlled classroom environment for desensitization to common sensory triggers like bells, chatter, and fluorescent lights.",
+      "category": "sensory_integration",
+      "difficulty": "easy",
+      "duration": 12,
+      "targetSkills": ["sensory_tolerance", "focus_attention"],
+      "abaParameters": {
+        "targetBehavior": "Tolerating sensory input",
+        "measurementType": "latency",
+        "promptLevels": ["environmental_modification", "verbal", "independent"]
+      },
+      "environmentSettings": {
+        "soundLevel": {
+          "min": 0,
+          "max": 100,
+          "default": 30,
+          "unit": "decibels"
+        },
+        "lightingBrightness": {
+          "min": 0,
+          "max": 100,
+          "default": 40,
+          "unit": "percentage"
+        },
+        "studentCount": {
+          "min": 0,
+          "max": 25,
+          "default": 10,
+          "unit": "students"
+        },
+        "sensoryTriggers": {
+          "options": ["minimal", "moderate", "realistic"],
+          "default": "minimal"
+        }
+      },
+      "preferences": {
+        "exitAvailability": {
+          "options": ["always", "scheduled", "therapist_only"],
+          "default": "always"
+        },
+        "calmingToolsAccess": {
+          "options": ["unlimited", "limited", "none"],
+          "default": "unlimited"
+        }
+      }
+    },
+    {
+      "id": "VR004",
+      "name": "Emotion Recognition Garden",
+      "description": "Interactive garden where children identify emotions on character faces and match them to scenarios.",
+      "category": "emotional_intelligence",
+      "difficulty": "easy",
+      "duration": 10,
+      "targetSkills": ["emotional_recognition", "empathy", "communication"],
+      "abaParameters": {
+        "targetBehavior": "Identifying emotions accurately",
+        "measurementType": "frequency",
+        "promptLevels": ["full_prompt", "partial_prompt", "independent"]
+      },
+      "environmentSettings": {
+        "emotionComplexity": {
+          "options": ["basic", "intermediate", "advanced"],
+          "default": "basic"
+        },
+        "distractorLevel": {
+          "min": 0,
+          "max": 100,
+          "default": 20,
+          "unit": "percentage"
+        }
+      },
+      "preferences": {
+        "reinforcementFrequency": {
+          "options": ["continuous", "intermittent", "minimal"],
+          "default": "continuous"
+        },
+        "audioFeedback": {
+          "options": ["enabled", "disabled"],
+          "default": "enabled"
+        }
+      }
+    },
+    {
+      "id": "VR005",
+      "name": "Playground Social Navigator",
+      "description": "Navigate playground social scenarios including turn-taking, joining games, and resolving conflicts.",
+      "category": "social_skills",
+      "difficulty": "medium",
+      "duration": 15,
+      "targetSkills": ["turn_taking", "social_interaction", "problem_solving"],
+      "abaParameters": {
+        "targetBehavior": "Appropriate social responses",
+        "measurementType": "frequency",
+        "promptLevels": ["modeling", "verbal", "gestural", "independent"]
+      },
+      "environmentSettings": {
+        "peerCount": {
+          "min": 2,
+          "max": 15,
+          "default": 6,
+          "unit": "children"
+        },
+        "activityType": {
+          "options": ["structured", "free_play", "mixed"],
+          "default": "structured"
+        },
+        "conflictLevel": {
+          "min": 0,
+          "max": 100,
+          "default": 20,
+          "unit": "percentage"
+        }
+      },
+      "preferences": {
+        "avatarCustomization": {
+          "options": ["enabled", "disabled"],
+          "default": "enabled"
+        },
+        "pauseAvailability": {
+          "options": ["anytime", "between_activities", "disabled"],
+          "default": "anytime"
+        }
+      }
+    },
+    {
+      "id": "VR006",
+      "name": "Restaurant Etiquette",
+      "description": "Practice restaurant behaviors including ordering food, waiting patiently, and using appropriate table manners.",
+      "category": "life_skills",
+      "difficulty": "medium",
+      "duration": 12,
+      "targetSkills": ["social_etiquette", "patience", "verbal_communication"],
+      "abaParameters": {
+        "targetBehavior": "Following social scripts",
+        "measurementType": "task_analysis",
+        "promptLevels": ["full_prompt", "partial_prompt", "independent"]
+      },
+      "environmentSettings": {
+        "restaurantType": {
+          "options": ["fast_food", "casual", "formal"],
+          "default": "casual"
+        },
+        "crowdDensity": {
+          "min": 0,
+          "max": 100,
+          "default": 40,
+          "unit": "percentage"
+        },
+        "waitTime": {
+          "min": 1,
+          "max": 10,
+          "default": 3,
+          "unit": "minutes"
+        }
+      },
+      "preferences": {
+        "menuComplexity": {
+          "options": ["simple", "moderate", "realistic"],
+          "default": "simple"
+        },
+        "socialPressure": {
+          "min": 0,
+          "max": 100,
+          "default": 30,
+          "unit": "percentage"
+        }
+      }
+    },
+    {
+      "id": "VR007",
+      "name": "Task Completion Challenge",
+      "description": "Series of structured tasks requiring focus, following multi-step instructions, and completing objectives.",
+      "category": "executive_function",
+      "difficulty": "medium",
+      "duration": 15,
+      "targetSkills": ["focus_attention", "following_instructions", "task_completion"],
+      "abaParameters": {
+        "targetBehavior": "Completing multi-step tasks",
+        "measurementType": "task_analysis",
+        "promptLevels": ["visual", "verbal", "independent"]
+      },
+      "environmentSettings": {
+        "taskComplexity": {
+          "options": ["2_steps", "3_steps", "4_plus_steps"],
+          "default": "2_steps"
+        },
+        "distractionLevel": {
+          "min": 0,
+          "max": 100,
+          "default": 20,
+          "unit": "percentage"
+        },
+        "timeLimit": {
+          "options": ["none", "generous", "realistic"],
+          "default": "generous"
+        }
+      },
+      "preferences": {
+        "visualAids": {
+          "options": ["maximum", "moderate", "minimal"],
+          "default": "maximum"
+        },
+        "successCriteria": {
+          "min": 50,
+          "max": 100,
+          "default": 80,
+          "unit": "percentage"
+        }
+      }
+    },
+    {
+      "id": "VR008",
+      "name": "Birthday Party Simulation",
+      "description": "Navigate a birthday party with loud music, many people, gift-giving, and group activities.",
+      "category": "social_skills",
+      "difficulty": "hard",
+      "duration": 18,
+      "targetSkills": ["social_interaction", "sensory_tolerance", "emotional_regulation"],
+      "abaParameters": {
+        "targetBehavior": "Appropriate party behavior",
+        "measurementType": "frequency",
+        "promptLevels": ["modeling", "verbal", "independent"]
+      },
+      "environmentSettings": {
+        "guestCount": {
+          "min": 5,
+          "max": 20,
+          "default": 10,
+          "unit": "children"
+        },
+        "noiseLevel": {
+          "min": 0,
+          "max": 100,
+          "default": 70,
+          "unit": "decibels"
+        },
+        "activityStructure": {
+          "options": ["highly_structured", "semi_structured", "unstructured"],
+          "default": "semi_structured"
+        }
+      },
+      "preferences": {
+        "quietSpaceAccess": {
+          "options": ["always_available", "on_request", "none"],
+          "default": "always_available"
+        },
+        "sensoryBreaks": {
+          "options": ["automatic", "on_request", "none"],
+          "default": "on_request"
+        }
+      }
+    },
+    {
+      "id": "VR009",
+      "name": "Transition Training Center",
+      "description": "Practice transitioning between different activities, environments, and emotional states with support strategies.",
+      "category": "emotional_regulation",
+      "difficulty": "medium",
+      "duration": 12,
+      "targetSkills": ["emotional_regulation", "flexibility", "coping_strategies"],
+      "abaParameters": {
+        "targetBehavior": "Smooth transitions without distress",
+        "measurementType": "latency",
+        "promptLevels": ["full_support", "partial_support", "independent"]
+      },
+      "environmentSettings": {
+        "transitionWarning": {
+          "min": 0,
+          "max": 5,
+          "default": 2,
+          "unit": "minutes"
+        },
+        "changeIntensity": {
+          "options": ["minimal", "moderate", "significant"],
+          "default": "minimal"
+        },
+        "supportLevel": {
+          "options": ["high", "medium", "low"],
+          "default": "high"
+        }
+      },
+      "preferences": {
+        "visualTimer": {
+          "options": ["enabled", "disabled"],
+          "default": "enabled"
+        },
+        "calmingStrategies": {
+          "options": ["always_shown", "on_demand", "hidden"],
+          "default": "always_shown"
+        }
+      }
+    },
+    {
+      "id": "VR010",
+      "name": "Safe Space Explorer",
+      "description": "Calm, low-stimulation environment for building comfort with VR, practicing basic controls, and self-regulation.",
+      "category": "foundational",
+      "difficulty": "very_easy",
+      "duration": 8,
+      "targetSkills": ["technology_comfort", "self_regulation", "basic_communication"],
+      "abaParameters": {
+        "targetBehavior": "Tolerating VR environment",
+        "measurementType": "duration",
+        "promptLevels": ["full_support", "independent"]
+      },
+      "environmentSettings": {
+        "stimulationLevel": {
+          "min": 0,
+          "max": 100,
+          "default": 10,
+          "unit": "percentage"
+        },
+        "environmentType": {
+          "options": ["nature", "space", "abstract", "bedroom"],
+          "default": "nature"
+        },
+        "interactivity": {
+          "options": ["passive", "minimal", "interactive"],
+          "default": "minimal"
+        }
+      },
+      "preferences": {
+        "exitAnytime": {
+          "options": ["enabled", "disabled"],
+          "default": "enabled"
+        },
+        "guidedBreathing": {
+          "options": ["enabled", "disabled"],
+          "default": "enabled"
+        }
+      }
+    }
+  ]
+}
