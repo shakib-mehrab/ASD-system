@@ -1,0 +1,252 @@
+{
+  "recommendations": [
+    {
+      "id": "REC001",
+      "patientId": "P001",
+      "patientName": "Emma Johnson",
+      "timestamp": "2026-02-06T09:30:00Z",
+      "priority": "high",
+      "type": "scene_modification",
+      "status": "pending",
+      "recommendation": {
+        "title": "Reduce Crowd Density in Grocery Store Scene",
+        "description": "AI detected elevated heart rate (avg 105 bpm) and decreased focus (62%) during last session. Recommend reducing NPC count from 15 to 8 for next session.",
+        "targetScene": "VR001",
+        "sceneName": "Grocery Store",
+        "currentSettings": {
+          "npcCount": 15,
+          "soundLevel": 45,
+          "lightingBrightness": 70
+        },
+        "suggestedSettings": {
+          "npcCount": 8,
+          "soundLevel": 40,
+          "lightingBrightness": 65
+        },
+        "expectedOutcome": "Reduce sensory overload, improve focus by 15-20%, maintain heart rate below 95 bpm"
+      },
+      "aiAnalysis": {
+        "confidenceScore": 87,
+        "dataSources": ["biometric_history", "behavioral_patterns", "session_outcomes"],
+        "keyInsights": [
+          "Patient shows 78% stress correlation with crowd density > 12",
+          "Focus improves by 23% in lower-density environments",
+          "3 of last 5 sessions had early exits when NPC count > 12"
+        ],
+        "reasoningPath": [
+          "Analyzed last 10 sessions for Emma",
+          "Identified heart rate spikes (>100 bpm) correlating with high NPC density",
+          "Cross-referenced with focus metrics showing inverse relationship",
+          "Compared to similar ASD Level 2 patients with sensory sensitivities",
+          "Generated recommendation to reduce crowd density by 47%"
+        ]
+      }
+    },
+    {
+      "id": "REC002",
+      "patientId": "P001",
+      "patientName": "Emma Johnson",
+      "timestamp": "2026-02-06T09:45:00Z",
+      "priority": "medium",
+      "type": "progression",
+      "status": "pending",
+      "recommendation": {
+        "title": "Progress to Restaurant Ordering Scenario",
+        "description": "Emma has maintained 85%+ success rate in greetings for 4 consecutive sessions. AI recommends introducing next skill level: restaurant ordering practice.",
+        "targetScene": "VR005",
+        "sceneName": "Restaurant Ordering",
+        "currentSkillLevel": "basic_greetings",
+        "nextSkillLevel": "restaurant_ordering",
+        "suggestedSettings": {
+          "npcCount": 3,
+          "soundLevel": 35,
+          "socialComplexity": "low",
+          "promptLevel": "high"
+        },
+        "expectedOutcome": "Smooth transition to intermediate social skills, maintain engagement above 80%"
+      },
+      "aiAnalysis": {
+        "confidenceScore": 92,
+        "dataSources": ["skill_mastery_tracking", "therapy_goals", "developmental_readiness"],
+        "keyInsights": [
+          "Consistent 85%+ success rate in current skill level",
+          "Therapy goal alignment: enhance social interaction skills",
+          "Age-appropriate progression to restaurant scenarios",
+          "Similar patients progressed successfully at this milestone"
+        ],
+        "reasoningPath": [
+          "Tracked Emma's greeting skill performance over 4 sessions",
+          "Identified mastery threshold achieved (85%+ success)",
+          "Matched next skill to IEP therapy goals",
+          "Selected restaurant scenario as next progression step",
+          "Configured initial settings for gradual introduction"
+        ]
+      }
+    },
+    {
+      "id": "REC003",
+      "patientId": "P002",
+      "patientName": "Liam Martinez",
+      "timestamp": "2026-02-06T10:15:00Z",
+      "priority": "high",
+      "type": "safety_alert",
+      "status": "pending",
+      "recommendation": {
+        "title": "Add Safety Pause Threshold for Street Crossing",
+        "description": "Liam's heart rate exceeded 115 bpm for 45+ seconds during last street crossing session. AI recommends implementing auto-pause when HR > 110 bpm for 30 seconds.",
+        "targetScene": "VR004",
+        "sceneName": "Street Crossing Safety",
+        "currentSettings": {
+          "autoPauseEnabled": false,
+          "heartRateThreshold": null,
+          "stressMonitoring": "manual"
+        },
+        "suggestedSettings": {
+          "autoPauseEnabled": true,
+          "heartRateThreshold": 110,
+          "thresholdDuration": 30,
+          "stressMonitoring": "automatic",
+          "pauseMessage": "Let's take a quick break. You're doing great!"
+        },
+        "expectedOutcome": "Prevent stress escalation, improve session completion rate, enhance safety protocols"
+      },
+      "aiAnalysis": {
+        "confidenceScore": 95,
+        "dataSources": ["real_time_biometrics", "safety_protocols", "clinical_guidelines"],
+        "keyInsights": [
+          "HR exceeded 115 bpm in 2 of last 3 street crossing sessions",
+          "High stress correlates with decreased decision accuracy",
+          "ASD safety guidelines recommend stress intervention at 110+ bpm",
+          "Auto-pause feature reduced anxiety in 89% of similar cases"
+        ],
+        "reasoningPath": [
+          "Monitored Liam's biometric data during high-stress scenarios",
+          "Identified sustained elevated heart rate as risk factor",
+          "Reviewed clinical guidelines for ASD stress management",
+          "Analyzed effectiveness of auto-pause in peer group",
+          "Recommended proactive intervention threshold"
+        ]
+      }
+    },
+    {
+      "id": "REC004",
+      "patientId": "P003",
+      "patientName": "Ava Thompson",
+      "timestamp": "2026-02-06T11:00:00Z",
+      "priority": "low",
+      "type": "reinforcement",
+      "status": "pending",
+      "recommendation": {
+        "title": "Introduce Token Economy System",
+        "description": "Ava responds well to visual rewards. AI suggests implementing token system where she earns stars for completing interaction goals.",
+        "targetScene": "all_scenes",
+        "sceneName": "All Sessions",
+        "suggestedSettings": {
+          "rewardSystem": "token_economy",
+          "tokensPerGoal": 1,
+          "exchangeThreshold": 5,
+          "rewards": ["extra_playtime", "favorite_activity", "sticker"]
+        },
+        "expectedOutcome": "Increase motivation, improve goal completion rate by 25%, enhance positive reinforcement"
+      },
+      "aiAnalysis": {
+        "confidenceScore": 78,
+        "dataSources": ["behavioral_response_patterns", "reinforcement_history", "motivation_analysis"],
+        "keyInsights": [
+          "Ava shows 65% higher engagement with visual rewards",
+          "Token systems effective in 73% of similar age/diagnosis cases",
+          "Current verbal praise alone showing diminishing returns",
+          "Parent reports successful token use at home"
+        ],
+        "reasoningPath": [
+          "Analyzed Ava's response to different reinforcement types",
+          "Identified strong positive correlation with visual rewards",
+          "Reviewed evidence-based practices for ASD motivation",
+          "Integrated parent feedback on home success",
+          "Designed token economy aligned with ABA principles"
+        ]
+      }
+    },
+    {
+      "id": "REC005",
+      "patientId": "P001",
+      "patientName": "Emma Johnson",
+      "timestamp": "2026-02-05T14:20:00Z",
+      "priority": "medium",
+      "type": "scene_modification",
+      "status": "approved",
+      "approvedBy": "T001",
+      "approvedAt": "2026-02-05T15:00:00Z",
+      "implementedAt": "2026-02-05T15:30:00Z",
+      "recommendation": {
+        "title": "Increase Eye Contact Duration Target",
+        "description": "Emma consistently achieving 5.8+ seconds of eye contact. AI recommends increasing target to 7 seconds.",
+        "targetScene": "VR002",
+        "sceneName": "Social Interaction Practice",
+        "currentSettings": {
+          "eyeContactTarget": 5,
+          "promptFrequency": "medium"
+        },
+        "suggestedSettings": {
+          "eyeContactTarget": 7,
+          "promptFrequency": "low"
+        },
+        "expectedOutcome": "Continue skill development, challenge Emma appropriately"
+      },
+      "aiAnalysis": {
+        "confidenceScore": 90,
+        "dataSources": ["skill_progression", "baseline_comparison", "success_patterns"],
+        "keyInsights": [
+          "Current target exceeded in 4 consecutive sessions",
+          "Average achievement: 5.8 seconds (116% of target)",
+          "Ready for next progression step per ABA protocols"
+        ],
+        "reasoningPath": [
+          "Tracked eye contact duration over last 4 sessions",
+          "Calculated average performance vs target",
+          "Applied ABA progression criteria (80%+ success rate)",
+          "Recommended 40% increase in difficulty level"
+        ]
+      },
+      "therapistFeedback": "Approved. Emma is ready for this challenge. Will implement in next session."
+    },
+    {
+      "id": "REC006",
+      "patientId": "P002",
+      "patientName": "Liam Martinez",
+      "timestamp": "2026-02-04T09:00:00Z",
+      "priority": "high",
+      "type": "scene_modification",
+      "status": "rejected",
+      "rejectedBy": "T001",
+      "rejectedAt": "2026-02-04T10:30:00Z",
+      "rejectionReason": "Liam's anxiety is primarily related to unexpected sounds, not crowd density. Will focus on auditory desensitization instead.",
+      "recommendation": {
+        "title": "Reduce Background Noise Level",
+        "description": "AI detected stress patterns during high ambient noise. Recommend reducing sound level from 50 to 35 decibels.",
+        "targetScene": "VR001",
+        "sceneName": "Grocery Store",
+        "currentSettings": {
+          "soundLevel": 50
+        },
+        "suggestedSettings": {
+          "soundLevel": 35
+        },
+        "expectedOutcome": "Reduce auditory stress"
+      },
+      "aiAnalysis": {
+        "confidenceScore": 72,
+        "dataSources": ["biometric_patterns", "environmental_factors"],
+        "keyInsights": [
+          "Heart rate spikes correlate with noise level increases",
+          "Similar patterns in grocery and classroom scenes"
+        ],
+        "reasoningPath": [
+          "Analyzed biometric responses to environmental variables",
+          "Identified correlation with sound levels",
+          "Recommended reduction in ambient noise"
+        ]
+      }
+    }
+  ]
+}

@@ -118,9 +118,9 @@ export default function TherapistVRInterface() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-900">
+    <div className="min-h-screen bg-slate-950">
       <div className="flex h-screen">
-        {/* Main VR Viewport - 70% */}
+        {/* Main VR Viewport - Full Screen with Overlays */}
         <div className="flex-1 relative bg-gradient-to-b from-sky-400 via-sky-300 to-emerald-200">
           {/* Grid overlay */}
           <div className="absolute inset-0 opacity-10"
@@ -133,30 +133,149 @@ export default function TherapistVRInterface() {
           {/* Scene Content */}
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center">
-              <div className="text-8xl mb-6">🏙️</div>
+              <div className="text-8xl mb-6">{sceneData.icon}</div>
               <div className="bg-black/30 backdrop-blur-md rounded-2xl px-8 py-6 border border-white/20">
-                <p className="text-3xl font-bold text-white mb-2">Street Crossing Practice</p>
+                <p className="text-3xl font-bold text-white mb-2">{sceneData.name}</p>
                 <p className="text-lg text-white/80">Patient View - Live Session</p>
               </div>
             </div>
           </div>
 
-          {/* Session Timer Overlay */}
-          <div className="absolute top-4 left-4">
-            <div className="bg-black/60 backdrop-blur-md rounded-xl px-4 py-2 border border-white/20">
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 bg-rose-500 rounded-full animate-pulse" />
-                <Timer className="w-4 h-4 text-white" />
-                <span className="text-white font-mono text-lg font-bold">{formatTime(sessionTime)}</span>
+          {/* Camera HUD Header */}
+          <div className="absolute top-0 left-0 right-0 bg-gradient-to-b from-black/80 to-transparent p-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                {/* Recording Indicator */}
+                <div className="flex items-center gap-2 bg-rose-600/90 backdrop-blur-sm rounded-lg px-3 py-2 border border-rose-400/30">
+                  <div className="w-3 h-3 bg-white rounded-full animate-pulse" />
+                  <span className="text-white font-mono text-sm font-bold">REC</span>
+                  <Timer className="w-4 h-4 text-white ml-1" />
+                  <span className="text-white font-mono text-sm font-bold">{formatTime(sessionTime)}</span>
+                </div>
+
+                {/* Camera Label */}
+                <div className="bg-black/70 backdrop-blur-sm rounded-lg px-4 py-2 border border-white/20">
+                  <p className="text-white font-mono text-sm">CAM-01 • LIVE MONITORING</p>
+                </div>
+              </div>
+
+              {/* Patient Info */}
+              <div className="bg-black/70 backdrop-blur-sm rounded-lg px-4 py-2 border border-emerald-400/30">
+                <div className="flex items-center gap-3">
+                  <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
+                  <div>
+                    <p className="text-white font-semibold text-sm">{patientData.name}</p>
+                    <p className="text-emerald-400 text-xs font-mono">{patientData.id} • Active</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Patient Info Overlay */}
-          <div className="absolute top-4 right-4">
-            <div className="bg-black/60 backdrop-blur-md rounded-xl px-4 py-3 border border-white/20">
-              <p className="text-white font-semibold">{patientData.name}</p>
-              <p className="text-white/70 text-sm">{patientData.id}</p>
+          {/* Camera-Style Monitoring Overlays - Right Side */}
+          <div className="absolute top-24 right-4 space-y-3 w-80">
+            {/* Biometric Monitor */}
+            <div className="bg-black/80 backdrop-blur-md rounded-xl border border-emerald-400/30 p-4 shadow-2xl">
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="text-emerald-400 text-xs font-mono uppercase tracking-wider flex items-center gap-2">
+                  <Activity className="w-3 h-3 animate-pulse" />
+                  Biometric Data
+                </h3>
+                <div className="text-emerald-400 text-xs font-mono">REAL-TIME</div>
+              </div>
+              
+              <div className="space-y-3">
+                {/* Heart Rate */}
+                <div className="border-l-2 border-rose-500 pl-3">
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-white/80 text-xs font-mono flex items-center gap-2">
+                      <Heart className="w-3 h-3 text-rose-500" />
+                      Heart Rate
+                    </span>
+                    <span className={`font-mono text-lg font-bold ${getStatusColor(100 - Math.abs(heartRate - 85))}`}>
+                      {Math.round(heartRate)}
+                    </span>
+                  </div>
+                  <div className="text-white/60 text-xs font-mono">BPM</div>
+                </div>
+
+                {/* Stress Level */}
+                <div className="border-l-2 border-amber-500 pl-3">
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-white/80 text-xs font-mono flex items-center gap-2">
+                      <AlertCircle className="w-3 h-3 text-amber-500" />
+                      Stress Level
+                    </span>
+                    <span className={`font-mono text-lg font-bold ${getStatusColor(stressLevel, true)}`}>
+                      {Math.round(stressLevel)}%
+                    </span>
+                  </div>
+                </div>
+
+                {/* Gaze Tracking */}
+                <div className="border-l-2 border-sky-500 pl-3">
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-white/80 text-xs font-mono flex items-center gap-2">
+                      <Eye className="w-3 h-3 text-sky-500" />
+                      Gaze Tracking
+                    </span>
+                    <span className={`font-mono text-lg font-bold ${getStatusColor(gazeTracking)}`}>
+                      {Math.round(gazeTracking)}%
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Cognitive Performance */}
+            <div className="bg-black/80 backdrop-blur-md rounded-xl border border-violet-400/30 p-4 shadow-2xl">
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="text-violet-400 text-xs font-mono uppercase tracking-wider flex items-center gap-2">
+                  <Brain className="w-3 h-3" />
+                  Cognitive Performance
+                </h3>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-3">
+                <div className="bg-slate-900/50 rounded-lg p-2 border border-white/10">
+                  <p className="text-white/60 text-xs font-mono mb-1">Focus Level</p>
+                  <p className={`font-mono text-2xl font-bold ${getStatusColor(focusLevel)}`}>
+                    {Math.round(focusLevel)}%
+                  </p>
+                </div>
+                <div className="bg-slate-900/50 rounded-lg p-2 border border-white/10">
+                  <p className="text-white/60 text-xs font-mono mb-1">Engagement</p>
+                  <p className={`font-mono text-2xl font-bold ${getStatusColor(engagement)}`}>
+                    {Math.round(engagement)}%
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Task Progress */}
+            <div className="bg-black/80 backdrop-blur-md rounded-xl border border-cyan-400/30 p-4 shadow-2xl">
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="text-cyan-400 text-xs font-mono uppercase tracking-wider flex items-center gap-2">
+                  <Target className="w-3 h-3" />
+                  Task Progress
+                </h3>
+                <span className="text-cyan-400 font-mono text-sm font-bold">{completedTasks}/{totalTasks}</span>
+              </div>
+              
+              <div className="space-y-2">
+                <div className="flex items-center gap-2 text-xs">
+                  <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+                  <span className="text-white/80 font-mono">Look before crossing</span>
+                </div>
+                <div className="flex items-center gap-2 text-xs">
+                  <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+                  <span className="text-white/80 font-mono">Identify safe moment</span>
+                </div>
+                <div className="flex items-center gap-2 text-xs">
+                  <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+                  <span className="text-white/80 font-mono">Wait for signal</span>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -215,159 +334,6 @@ export default function TherapistVRInterface() {
               </div>
             </div>
           )}
-        </div>
-
-        {/* Monitoring Panel - 30% */}
-        <div className="w-[400px] bg-slate-800 border-l border-slate-700 overflow-y-auto">
-          <div className="p-6 space-y-4">
-            {/* Header */}
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-bold text-white">Live Monitoring</h2>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
-                <span className="text-emerald-400 text-sm font-medium">Active</span>
-              </div>
-            </div>
-
-            {/* Biometric Metrics */}
-            <Card className="bg-slate-900/50 border-slate-700 p-4">
-              <h3 className="text-sm font-semibold text-slate-300 mb-4 flex items-center gap-2">
-                <Activity className="w-4 h-4" />
-                Biometric Data
-              </h3>
-              <div className="space-y-4">
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-white text-sm flex items-center gap-2">
-                      <Heart className="w-4 h-4 text-rose-500" />
-                      Heart Rate
-                    </span>
-                    <span className={`font-bold ${getStatusColor(100 - Math.abs(heartRate - 85))}`}>
-                      {Math.round(heartRate)} BPM
-                    </span>
-                  </div>
-                  <Progress value={heartRate} max={120} className="h-2" />
-                </div>
-
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-white text-sm flex items-center gap-2">
-                      <AlertCircle className="w-4 h-4 text-amber-500" />
-                      Stress Level
-                    </span>
-                    <span className={`font-bold ${getStatusColor(stressLevel, true)}`}>
-                      {Math.round(stressLevel)}%
-                    </span>
-                  </div>
-                  <Progress value={stressLevel} className="h-2" />
-                </div>
-
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-white text-sm flex items-center gap-2">
-                      <Eye className="w-4 h-4 text-sky-500" />
-                      Gaze Tracking
-                    </span>
-                    <span className={`font-bold ${getStatusColor(gazeTracking)}`}>
-                      {Math.round(gazeTracking)}%
-                    </span>
-                  </div>
-                  <Progress value={gazeTracking} className="h-2" />
-                </div>
-              </div>
-            </Card>
-
-            {/* Cognitive Metrics */}
-            <Card className="bg-slate-900/50 border-slate-700 p-4">
-              <h3 className="text-sm font-semibold text-slate-300 mb-4 flex items-center gap-2">
-                <Brain className="w-4 h-4" />
-                Cognitive Performance
-              </h3>
-              <div className="space-y-4">
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-white text-sm">Focus Level</span>
-                    <span className={`font-bold ${getStatusColor(focusLevel)}`}>
-                      {Math.round(focusLevel)}%
-                    </span>
-                  </div>
-                  <Progress value={focusLevel} className="h-2" />
-                </div>
-
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-white text-sm">Engagement</span>
-                    <span className={`font-bold ${getStatusColor(engagement)}`}>
-                      {Math.round(engagement)}%
-                    </span>
-                  </div>
-                  <Progress value={engagement} className="h-2" />
-                </div>
-              </div>
-            </Card>
-
-            {/* Task Progress */}
-            <Card className="bg-slate-900/50 border-slate-700 p-4">
-              <h3 className="text-sm font-semibold text-slate-300 mb-4 flex items-center gap-2">
-                <Target className="w-4 h-4" />
-                Task Progress
-              </h3>
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-white text-sm">Completed Tasks</span>
-                  <span className="text-emerald-400 font-bold">{completedTasks}/{totalTasks}</span>
-                </div>
-                <Progress value={(completedTasks / totalTasks) * 100} className="h-2" />
-                
-                <div className="pt-2 space-y-2">
-                  <div className="flex items-center gap-2 text-xs">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-slate-300">Look before crossing</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-xs">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-slate-300">Identify safe moment</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-xs">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-slate-300">Wait for signal</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-xs">
-                    <div className="w-4 h-4 border-2 border-slate-600 rounded-full" />
-                    <span className="text-slate-500">Cross safely</span>
-                  </div>
-                </div>
-              </div>
-            </Card>
-
-            {/* Real-time Alerts */}
-            <Card className="bg-slate-900/50 border-slate-700 p-4">
-              <h3 className="text-sm font-semibold text-slate-300 mb-4 flex items-center gap-2">
-                <Zap className="w-4 h-4" />
-                Real-time Insights
-              </h3>
-              <div className="space-y-2">
-                <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-3">
-                  <p className="text-emerald-400 text-xs font-medium">Good eye contact maintained</p>
-                </div>
-                <div className="bg-sky-500/10 border border-sky-500/30 rounded-lg p-3">
-                  <p className="text-sky-400 text-xs font-medium">Patient responding well to prompts</p>
-                </div>
-              </div>
-            </Card>
-
-            {/* Quick Actions */}
-            <div className="space-y-2">
-              <button className="w-full px-4 py-3 bg-sky-600 hover:bg-sky-700 text-white rounded-lg transition-all flex items-center justify-center gap-2 text-sm font-medium">
-                <MessageSquare className="w-4 h-4" />
-                Send Voice Prompt
-              </button>
-              <button className="w-full px-4 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-all flex items-center justify-center gap-2 text-sm font-medium">
-                <Users className="w-4 h-4" />
-                Adjust Scenario
-              </button>
-            </div>
-          </div>
         </div>
       </div>
 

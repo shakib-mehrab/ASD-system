@@ -168,64 +168,61 @@ export default function TherapistPatientList() {
         </div>
 
         {/* Patient List */}
-        <div className="space-y-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {filteredPatients.length === 0 ? (
-            <Card className="p-12 text-center">
+            <Card className="p-12 text-center col-span-full">
               <p className="text-gray-500 text-lg">No patients found</p>
             </Card>
           ) : (
             filteredPatients.map((patient) => (
               <Card
                 key={patient.id}
-                className="p-6 cursor-pointer hover:shadow-lg transition-all border-2 border-transparent hover:border-emerald-200"
+                className="p-3 cursor-pointer hover:shadow-lg transition-all border-2 border-transparent hover:border-emerald-200 flex flex-col"
                 onClick={() => navigate('/therapist/patient-detail', { state: { patient } })}
               >
-                <div className="flex items-start justify-between gap-4 flex-wrap">
-                  <div className="flex items-start gap-4 flex-1">
-                    <div className="w-12 h-12 bg-sky-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <User className="w-6 h-6 text-sky-600" />
-                    </div>
-                    
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        <h3 className="text-xl text-slate-900 font-semibold">{patient.name}</h3>
-                        <span className="text-sm text-slate-500">ID: {patient.id}</span>
-                        {patient.hasCompletedOnboarding ? (
-                          <CheckCircle className="w-5 h-5 text-emerald-600" />
-                        ) : (
-                          <AlertTriangle className="w-5 h-5 text-amber-600" />
-                        )}
-                      </div>
-                      
-                      <div className="flex gap-4 flex-wrap text-sm text-slate-600 mb-3">
-                        <div className="flex items-center gap-1">
-                          <User className="w-4 h-4" />
-                          Age {patient.age}
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Clock className="w-4 h-4" />
-                          Guardian: {patient.guardianName}
-                        </div>
-                      </div>
-
-                      <div className="flex gap-2 flex-wrap">
-                        <Badge variant="outline">{patient.primaryDiagnosis}</Badge>
-                        {patient.secondaryDiagnosis && (
-                          <Badge variant="outline">{patient.secondaryDiagnosis}</Badge>
-                        )}
-                      </div>
-                    </div>
+                {/* Status Badge - Top Right */}
+                <div className="flex justify-between items-start mb-2">
+                  <div className="w-8 h-8 bg-sky-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <User className="w-4 h-4 text-sky-600" />
                   </div>
-
-                  {/* Readiness Indicator */}
-                  <div className="flex flex-col gap-2 items-end">
-                    <div className={`px-4 py-2 rounded-xl ${getReadinessColor(patient)}`}>
-                      <p className="text-sm font-medium">
-                        {patient.hasCompletedOnboarding ? 'Ready for therapy' : 'Needs onboarding'}
-                      </p>
-                    </div>
-                    <ArrowRight className="w-5 h-5 text-slate-400" />
+                  {patient.hasCompletedOnboarding ? (
+                    <CheckCircle className="w-4 h-4 text-emerald-600" />
+                  ) : (
+                    <AlertTriangle className="w-4 h-4 text-amber-600" />
+                  )}
+                </div>
+                
+                {/* Patient Name & ID */}
+                <div className="mb-1.5">
+                  <h3 className="text-sm text-slate-900 font-semibold line-clamp-1">{patient.name}</h3>
+                  <span className="text-xs text-slate-500">{patient.id}</span>
+                </div>
+                
+                {/* Patient Details */}
+                <div className="space-y-0.5 text-xs text-slate-600 mb-2 flex-1">
+                  <div className="flex items-center gap-1">
+                    <User className="w-3 h-3" />
+                    Age {patient.age}
                   </div>
+                  <div className="flex items-center gap-1">
+                    <Clock className="w-3 h-3" />
+                    <span className="line-clamp-1">{patient.guardianName}</span>
+                  </div>
+                </div>
+
+                {/* Diagnosis Badges */}
+                <div className="space-y-0.5 mb-2">
+                  <Badge variant="outline" className="text-xs w-full justify-center line-clamp-1 py-0">{patient.primaryDiagnosis}</Badge>
+                  {patient.secondaryDiagnosis && (
+                    <Badge variant="outline" className="text-xs w-full justify-center line-clamp-1 py-0">{patient.secondaryDiagnosis}</Badge>
+                  )}
+                </div>
+
+                {/* Readiness Status */}
+                <div className={`px-2 py-1 rounded-lg text-center ${getReadinessColor(patient)}`}>
+                  <p className="text-xs font-medium line-clamp-1">
+                    {patient.hasCompletedOnboarding ? 'Ready' : 'Needs onboarding'}
+                  </p>
                 </div>
               </Card>
             ))

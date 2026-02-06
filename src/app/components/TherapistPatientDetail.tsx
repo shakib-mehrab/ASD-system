@@ -136,36 +136,36 @@ export default function TherapistPatientDetail() {
       </div>
 
       {/* Sessions Overview */}
-      <div className="grid md:grid-cols-2 gap-6 mb-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
         {/* Total Sessions */}
-        <Card className="bg-gradient-to-br from-emerald-50 to-sky-50 p-6 border-emerald-200">
-          <div className="flex items-center justify-between mb-4">
+        <Card className="bg-gradient-to-br from-emerald-50 to-sky-50 p-4 border-emerald-200">
+          <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
-              <Calendar className="w-5 h-5 text-emerald-600" />
-              <h3 className="text-lg font-semibold text-slate-900">Total Sessions</h3>
+              <Calendar className="w-4 h-4 text-emerald-600" />
+              <h3 className="text-base font-semibold text-slate-900">Sessions</h3>
             </div>
-            <Badge className="bg-emerald-600 text-white text-lg px-4 py-1">{sessions.length}</Badge>
+            <Badge className="bg-emerald-600 text-white text-sm px-3 py-1">{sessions.length}</Badge>
           </div>
-          <div className="space-y-2">
+          <div className="space-y-2 max-h-60 overflow-y-auto">
             {sessions.map(session => (
               <div 
                 key={session.id}
                 onClick={() => setSelectedSession(session.id)}
-                className={`p-3 rounded-lg cursor-pointer transition-all ${
+                className={`p-2 rounded-lg cursor-pointer transition-all ${
                   selectedSession === session.id 
                     ? 'bg-white shadow-md border-2 border-emerald-500' 
                     : 'bg-white/50 hover:bg-white border border-slate-200'
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <Calendar className="w-4 h-4 text-slate-500" />
+                  <div className="flex items-center gap-2">
+                    <Calendar className="w-3 h-3 text-slate-500" />
                     <div>
-                      <p className="font-medium text-slate-900">{session.date}</p>
+                      <p className="font-medium text-slate-900 text-sm">{session.date}</p>
                       <p className="text-xs text-slate-600">{session.scene}</p>
                     </div>
                   </div>
-                  <Badge className={session.status === 'Active' ? 'bg-amber-100 text-amber-700' : 'bg-emerald-100 text-emerald-700'}>
+                  <Badge className={`text-xs ${session.status === 'Active' ? 'bg-amber-100 text-amber-700' : 'bg-emerald-100 text-emerald-700'}`}>
                     {session.status}
                   </Badge>
                 </div>
@@ -175,41 +175,41 @@ export default function TherapistPatientDetail() {
         </Card>
 
         {/* Upcoming Sessions */}
-        <Card className="bg-gradient-to-br from-purple-50 to-pink-50 p-6 border-purple-200">
-          <div className="flex items-center justify-between mb-4">
+        <Card className="bg-gradient-to-br from-purple-50 to-pink-50 p-4 border-purple-200 lg:col-span-2">
+          <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
-              <Calendar className="w-5 h-5 text-purple-600" />
-              <h3 className="text-lg font-semibold text-slate-900">Upcoming Sessions</h3>
+              <Calendar className="w-4 h-4 text-purple-600" />
+              <h3 className="text-base font-semibold text-slate-900">Upcoming Sessions</h3>
             </div>
-            <Badge className="bg-purple-600 text-white px-3 py-1">3</Badge>
+            <Badge className="bg-purple-600 text-white text-sm px-3 py-1">3</Badge>
           </div>
-          <div className="space-y-3">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             <div className="p-3 bg-white rounded-lg border border-purple-200">
               <div className="flex items-center justify-between mb-2">
-                <p className="font-medium text-slate-900">Feb 9, 2026</p>
-                <Badge className="bg-sky-100 text-sky-700">Scheduled</Badge>
+                <p className="font-medium text-slate-900 text-sm">Feb 9, 2026</p>
+                <Badge className="bg-sky-100 text-sky-700 text-xs">Scheduled</Badge>
               </div>
-              <p className="text-sm text-slate-600">Restaurant Environment</p>
-              <p className="text-xs text-slate-500 mt-1">Focus: Ordering food, social interaction</p>
+              <p className="text-sm text-slate-600">Restaurant</p>
+              <p className="text-xs text-slate-500 mt-1 line-clamp-1">Ordering food, social interaction</p>
             </div>
             <div className="p-3 bg-white rounded-lg border border-purple-200">
               <div className="flex items-center justify-between mb-2">
-                <p className="font-medium text-slate-900">Feb 12, 2026</p>
-                <Badge className="bg-sky-100 text-sky-700">Scheduled</Badge>
+                <p className="font-medium text-slate-900 text-sm">Feb 12, 2026</p>
+                <Badge className="bg-sky-100 text-sky-700 text-xs">Scheduled</Badge>
               </div>
-              <p className="text-sm text-slate-600">Playground Scenario</p>
-              <p className="text-xs text-slate-500 mt-1">Focus: Sharing, turn-taking</p>
+              <p className="text-sm text-slate-600">Playground</p>
+              <p className="text-xs text-slate-500 mt-1 line-clamp-1">Sharing, turn-taking</p>
             </div>
             <div className="p-3 bg-white rounded-lg border border-purple-200">
               <div className="flex items-center justify-between mb-2">
-                <p className="font-medium text-slate-900">Feb 15, 2026</p>
-                <Badge className="bg-sky-100 text-sky-700">Scheduled</Badge>
+                <p className="font-medium text-slate-900 text-sm">Feb 15, 2026</p>
+                <Badge className="bg-sky-100 text-sky-700 text-xs">Scheduled</Badge>
               </div>
-              <p className="text-sm text-slate-600">School Classroom</p>
-              <p className="text-xs text-slate-500 mt-1">Focus: Following instructions, group work</p>
+              <p className="text-sm text-slate-600">Classroom</p>
+              <p className="text-xs text-slate-500 mt-1 line-clamp-1">Following instructions, group work</p>
             </div>
           </div>
-          <button className="w-full mt-4 py-2 text-purple-600 hover:bg-purple-100 rounded-lg transition-colors text-sm font-medium">
+          <button className="w-full mt-3 py-2 text-purple-600 hover:bg-purple-100 rounded-lg transition-colors text-sm font-medium">
             + Schedule New Session
           </button>
         </Card>
@@ -225,105 +225,105 @@ export default function TherapistPatientDetail() {
           <Badge className="bg-violet-600 text-white px-3 py-1">Last 5 Sessions</Badge>
         </div>
         
-        <div className="space-y-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
           {/* VR Session 1 */}
-          <div className="bg-white rounded-xl p-4 border border-violet-200 hover:shadow-md transition-shadow">
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center">
-                  <CheckSquare className="w-5 h-5 text-emerald-600" />
+          <div className="bg-white rounded-lg p-3 border border-violet-200 hover:shadow-md transition-shadow">
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 bg-emerald-100 rounded-lg flex items-center justify-center">
+                  <CheckSquare className="w-4 h-4 text-emerald-600" />
                 </div>
                 <div>
-                  <p className="font-semibold text-slate-900">Grocery Store</p>
-                  <p className="text-xs text-slate-600">Feb 6, 2026 • 22 minutes</p>
+                  <p className="font-semibold text-slate-900 text-sm">Grocery Store</p>
+                  <p className="text-xs text-slate-600">Feb 6 • 22 min</p>
                 </div>
               </div>
-              <Badge className="bg-emerald-100 text-emerald-700">Completed</Badge>
             </div>
-            <div className="grid grid-cols-4 gap-3">
+            <Badge className="bg-emerald-100 text-emerald-700 text-xs mb-2">Completed</Badge>
+            <div className="grid grid-cols-2 gap-2">
               <div className="bg-purple-50 rounded-lg p-2 text-center">
-                <p className="text-xs text-slate-600 mb-1">Focus</p>
-                <p className="text-lg font-bold text-purple-600">78%</p>
+                <p className="text-xs text-slate-600">Focus</p>
+                <p className="text-sm font-bold text-purple-600">78%</p>
               </div>
               <div className="bg-sky-50 rounded-lg p-2 text-center">
-                <p className="text-xs text-slate-600 mb-1">Engagement</p>
-                <p className="text-lg font-bold text-sky-600">82%</p>
+                <p className="text-xs text-slate-600">Engage</p>
+                <p className="text-sm font-bold text-sky-600">82%</p>
               </div>
               <div className="bg-emerald-50 rounded-lg p-2 text-center">
-                <p className="text-xs text-slate-600 mb-1">Tasks</p>
-                <p className="text-lg font-bold text-emerald-600">3/8</p>
+                <p className="text-xs text-slate-600">Tasks</p>
+                <p className="text-sm font-bold text-emerald-600">3/8</p>
               </div>
               <div className="bg-amber-50 rounded-lg p-2 text-center">
-                <p className="text-xs text-slate-600 mb-1">Heart Rate</p>
-                <p className="text-lg font-bold text-amber-600">85</p>
+                <p className="text-xs text-slate-600">HR</p>
+                <p className="text-sm font-bold text-amber-600">85</p>
               </div>
             </div>
           </div>
 
           {/* VR Session 2 */}
-          <div className="bg-white rounded-xl p-4 border border-violet-200 hover:shadow-md transition-shadow">
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center">
-                  <CheckSquare className="w-5 h-5 text-emerald-600" />
+          <div className="bg-white rounded-lg p-3 border border-violet-200 hover:shadow-md transition-shadow">
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 bg-emerald-100 rounded-lg flex items-center justify-center">
+                  <CheckSquare className="w-4 h-4 text-emerald-600" />
                 </div>
                 <div>
-                  <p className="font-semibold text-slate-900">Street Crossing</p>
-                  <p className="text-xs text-slate-600">Feb 3, 2026 • 25 minutes</p>
+                  <p className="font-semibold text-slate-900 text-sm">Street Crossing</p>
+                  <p className="text-xs text-slate-600">Feb 3 • 25 min</p>
                 </div>
               </div>
-              <Badge className="bg-emerald-100 text-emerald-700">Completed</Badge>
             </div>
-            <div className="grid grid-cols-4 gap-3">
+            <Badge className="bg-emerald-100 text-emerald-700 text-xs mb-2">Completed</Badge>
+            <div className="grid grid-cols-2 gap-2">
               <div className="bg-purple-50 rounded-lg p-2 text-center">
-                <p className="text-xs text-slate-600 mb-1">Focus</p>
-                <p className="text-lg font-bold text-purple-600">92%</p>
+                <p className="text-xs text-slate-600">Focus</p>
+                <p className="text-sm font-bold text-purple-600">92%</p>
               </div>
               <div className="bg-sky-50 rounded-lg p-2 text-center">
-                <p className="text-xs text-slate-600 mb-1">Engagement</p>
-                <p className="text-lg font-bold text-sky-600">88%</p>
+                <p className="text-xs text-slate-600">Engage</p>
+                <p className="text-sm font-bold text-sky-600">88%</p>
               </div>
               <div className="bg-emerald-50 rounded-lg p-2 text-center">
-                <p className="text-xs text-slate-600 mb-1">Tasks</p>
-                <p className="text-lg font-bold text-emerald-600">4/4</p>
+                <p className="text-xs text-slate-600">Tasks</p>
+                <p className="text-sm font-bold text-emerald-600">4/4</p>
               </div>
               <div className="bg-amber-50 rounded-lg p-2 text-center">
-                <p className="text-xs text-slate-600 mb-1">Heart Rate</p>
-                <p className="text-lg font-bold text-amber-600">82</p>
+                <p className="text-xs text-slate-600">HR</p>
+                <p className="text-sm font-bold text-amber-600">82</p>
               </div>
             </div>
           </div>
 
           {/* VR Session 3 */}
-          <div className="bg-white rounded-xl p-4 border border-violet-200 hover:shadow-md transition-shadow">
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-sky-100 rounded-lg flex items-center justify-center">
-                  <Play className="w-5 h-5 text-sky-600" />
+          <div className="bg-white rounded-lg p-3 border border-violet-200 hover:shadow-md transition-shadow">
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 bg-sky-100 rounded-lg flex items-center justify-center">
+                  <Play className="w-4 h-4 text-sky-600" />
                 </div>
                 <div>
-                  <p className="font-semibold text-slate-900">Restaurant Ordering</p>
-                  <p className="text-xs text-slate-600">Jan 30, 2026 • 18 minutes</p>
+                  <p className="font-semibold text-slate-900 text-sm">Restaurant</p>
+                  <p className="text-xs text-slate-600">Jan 30 • 18 min</p>
                 </div>
               </div>
-              <Badge className="bg-amber-100 text-amber-700">Early Exit</Badge>
             </div>
-            <div className="grid grid-cols-4 gap-3">
+            <Badge className="bg-amber-100 text-amber-700 text-xs mb-2">Early Exit</Badge>
+            <div className="grid grid-cols-2 gap-2">
               <div className="bg-purple-50 rounded-lg p-2 text-center">
-                <p className="text-xs text-slate-600 mb-1">Focus</p>
-                <p className="text-lg font-bold text-purple-600">65%</p>
+                <p className="text-xs text-slate-600">Focus</p>
+                <p className="text-sm font-bold text-purple-600">65%</p>
               </div>
               <div className="bg-sky-50 rounded-lg p-2 text-center">
-                <p className="text-xs text-slate-600 mb-1">Engagement</p>
-                <p className="text-lg font-bold text-sky-600">72%</p>
+                <p className="text-xs text-slate-600">Engage</p>
+                <p className="text-sm font-bold text-sky-600">72%</p>
               </div>
               <div className="bg-emerald-50 rounded-lg p-2 text-center">
-                <p className="text-xs text-slate-600 mb-1">Tasks</p>
-                <p className="text-lg font-bold text-emerald-600">2/6</p>
+                <p className="text-xs text-slate-600">Tasks</p>
+                <p className="text-sm font-bold text-emerald-600">2/6</p>
               </div>
               <div className="bg-amber-50 rounded-lg p-2 text-center">
-                <p className="text-xs text-slate-600 mb-1">Heart Rate</p>
-                <p className="text-lg font-bold text-amber-600">98</p>
+                <p className="text-xs text-slate-600">HR</p>
+                <p className="text-sm font-bold text-amber-600">98</p>
               </div>
             </div>
           </div>
@@ -443,44 +443,44 @@ export default function TherapistPatientDetail() {
           </div>
 
           {/* Right Column */}
-          <div className="space-y-6">
+          <div className="space-y-4">
             {/* Home Practice */}
-            <Card className="bg-white p-6">
-              <div className="flex items-center gap-2 mb-4">
-                <Home className="w-5 h-5 text-amber-600" />
-                <h2 className="text-xl text-slate-900 font-semibold">Home Practice</h2>
+            <Card className="bg-white p-4">
+              <div className="flex items-center gap-2 mb-3">
+                <Home className="w-4 h-4 text-amber-600" />
+                <h2 className="text-base text-slate-900 font-semibold">Home Practice</h2>
               </div>
               
-              <div className="space-y-3">
+              <div className="space-y-2">
                 {currentSession.homePractice.map(practice => (
                   <div 
                     key={practice.id}
-                    className={`p-4 rounded-lg border-2 ${
+                    className={`p-2 rounded-lg border ${
                       practice.completed 
                         ? 'bg-emerald-50 border-emerald-200' 
                         : 'bg-amber-50 border-amber-200'
                     }`}
                   >
-                    <div className="flex items-start gap-3">
-                      <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center mt-0.5 ${
+                    <div className="flex items-start gap-2">
+                      <div className={`w-4 h-4 rounded-full border flex items-center justify-center mt-0.5 ${
                         practice.completed ? 'bg-emerald-500 border-emerald-500' : 'border-amber-300'
                       }`}>
                         {practice.completed && (
-                          <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                           </svg>
                         )}
                       </div>
-                      <div className="flex-1">
-                        <p className="text-slate-900 font-medium mb-1">{practice.exercise}</p>
-                        <p className="text-sm text-slate-600">{practice.duration}</p>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm text-slate-900 font-medium line-clamp-1">{practice.exercise}</p>
+                        <p className="text-xs text-slate-600">{practice.duration}</p>
                       </div>
                     </div>
                   </div>
                 ))}
               </div>
 
-              <button className="w-full mt-4 py-2 text-amber-600 hover:bg-amber-50 rounded-lg transition-colors text-sm font-medium">
+              <button className="w-full mt-3 py-1.5 text-amber-600 hover:bg-amber-50 rounded-lg transition-colors text-xs font-medium">
                 + Add Exercise
               </button>
             </Card>
