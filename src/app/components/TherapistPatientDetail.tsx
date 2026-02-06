@@ -215,6 +215,121 @@ export default function TherapistPatientDetail() {
         </Card>
       </div>
 
+      {/* Recent VR Session Summary */}
+      <Card className="bg-gradient-to-r from-violet-50 to-purple-50 p-6 mb-6 border-violet-200">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-2">
+            <Activity className="w-5 h-5 text-violet-600" />
+            <h3 className="text-lg font-semibold text-slate-900">Recent VR Sessions</h3>
+          </div>
+          <Badge className="bg-violet-600 text-white px-3 py-1">Last 5 Sessions</Badge>
+        </div>
+        
+        <div className="space-y-3">
+          {/* VR Session 1 */}
+          <div className="bg-white rounded-xl p-4 border border-violet-200 hover:shadow-md transition-shadow">
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center">
+                  <CheckSquare className="w-5 h-5 text-emerald-600" />
+                </div>
+                <div>
+                  <p className="font-semibold text-slate-900">Grocery Store</p>
+                  <p className="text-xs text-slate-600">Feb 6, 2026 • 22 minutes</p>
+                </div>
+              </div>
+              <Badge className="bg-emerald-100 text-emerald-700">Completed</Badge>
+            </div>
+            <div className="grid grid-cols-4 gap-3">
+              <div className="bg-purple-50 rounded-lg p-2 text-center">
+                <p className="text-xs text-slate-600 mb-1">Focus</p>
+                <p className="text-lg font-bold text-purple-600">78%</p>
+              </div>
+              <div className="bg-sky-50 rounded-lg p-2 text-center">
+                <p className="text-xs text-slate-600 mb-1">Engagement</p>
+                <p className="text-lg font-bold text-sky-600">82%</p>
+              </div>
+              <div className="bg-emerald-50 rounded-lg p-2 text-center">
+                <p className="text-xs text-slate-600 mb-1">Tasks</p>
+                <p className="text-lg font-bold text-emerald-600">3/8</p>
+              </div>
+              <div className="bg-amber-50 rounded-lg p-2 text-center">
+                <p className="text-xs text-slate-600 mb-1">Heart Rate</p>
+                <p className="text-lg font-bold text-amber-600">85</p>
+              </div>
+            </div>
+          </div>
+
+          {/* VR Session 2 */}
+          <div className="bg-white rounded-xl p-4 border border-violet-200 hover:shadow-md transition-shadow">
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center">
+                  <CheckSquare className="w-5 h-5 text-emerald-600" />
+                </div>
+                <div>
+                  <p className="font-semibold text-slate-900">Street Crossing</p>
+                  <p className="text-xs text-slate-600">Feb 3, 2026 • 25 minutes</p>
+                </div>
+              </div>
+              <Badge className="bg-emerald-100 text-emerald-700">Completed</Badge>
+            </div>
+            <div className="grid grid-cols-4 gap-3">
+              <div className="bg-purple-50 rounded-lg p-2 text-center">
+                <p className="text-xs text-slate-600 mb-1">Focus</p>
+                <p className="text-lg font-bold text-purple-600">92%</p>
+              </div>
+              <div className="bg-sky-50 rounded-lg p-2 text-center">
+                <p className="text-xs text-slate-600 mb-1">Engagement</p>
+                <p className="text-lg font-bold text-sky-600">88%</p>
+              </div>
+              <div className="bg-emerald-50 rounded-lg p-2 text-center">
+                <p className="text-xs text-slate-600 mb-1">Tasks</p>
+                <p className="text-lg font-bold text-emerald-600">4/4</p>
+              </div>
+              <div className="bg-amber-50 rounded-lg p-2 text-center">
+                <p className="text-xs text-slate-600 mb-1">Heart Rate</p>
+                <p className="text-lg font-bold text-amber-600">82</p>
+              </div>
+            </div>
+          </div>
+
+          {/* VR Session 3 */}
+          <div className="bg-white rounded-xl p-4 border border-violet-200 hover:shadow-md transition-shadow">
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-sky-100 rounded-lg flex items-center justify-center">
+                  <Play className="w-5 h-5 text-sky-600" />
+                </div>
+                <div>
+                  <p className="font-semibold text-slate-900">Restaurant Ordering</p>
+                  <p className="text-xs text-slate-600">Jan 30, 2026 • 18 minutes</p>
+                </div>
+              </div>
+              <Badge className="bg-amber-100 text-amber-700">Early Exit</Badge>
+            </div>
+            <div className="grid grid-cols-4 gap-3">
+              <div className="bg-purple-50 rounded-lg p-2 text-center">
+                <p className="text-xs text-slate-600 mb-1">Focus</p>
+                <p className="text-lg font-bold text-purple-600">65%</p>
+              </div>
+              <div className="bg-sky-50 rounded-lg p-2 text-center">
+                <p className="text-xs text-slate-600 mb-1">Engagement</p>
+                <p className="text-lg font-bold text-sky-600">72%</p>
+              </div>
+              <div className="bg-emerald-50 rounded-lg p-2 text-center">
+                <p className="text-xs text-slate-600 mb-1">Tasks</p>
+                <p className="text-lg font-bold text-emerald-600">2/6</p>
+              </div>
+              <div className="bg-amber-50 rounded-lg p-2 text-center">
+                <p className="text-xs text-slate-600 mb-1">Heart Rate</p>
+                <p className="text-lg font-bold text-amber-600">98</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Card>
+
       {/* Session Tabs */}
       <div className="mb-6 flex gap-3 overflow-x-auto pb-2">
         {sessions.map(session => (
