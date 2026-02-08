@@ -7,6 +7,9 @@ import { Badge } from './ui/badge';
 import { Slider } from './ui/slider';
 import { Label } from './ui/label';
 import { Switch } from './ui/switch';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from './ui/dialog';
+import { Button } from './ui/button';
+import { Textarea } from './ui/textarea';
 
 export default function TherapistPatientDetail() {
   const navigate = useNavigate();
@@ -22,6 +25,16 @@ export default function TherapistPatientDetail() {
   const [showAddTaskDialog, setShowAddTaskDialog] = useState(false);
   const [showVRSetupModal, setShowVRSetupModal] = useState(false);
   const [selectedScene, setSelectedScene] = useState('grocery');
+  const [showAddNoteDialog, setShowAddNoteDialog] = useState(false);
+  const [newClinicalNote, setNewClinicalNote] = useState('');
+  const [showScheduleSessionDialog, setShowScheduleSessionDialog] = useState(false);
+  const [showAddTodoDialog, setShowAddTodoDialog] = useState(false);
+  const [showAddExerciseDialog, setShowAddExerciseDialog] = useState(false);
+  const [showEditNoteDialog, setShowEditNoteDialog] = useState(false);
+  const [editingNote, setEditingNote] = useState('');
+  const [newTodoItem, setNewTodoItem] = useState('');
+  const [newExercise, setNewExercise] = useState({ title: '', duration: '' });
+  const [newSession, setNewSession] = useState({ date: '', scene: '', description: '' });
 
   // VR Preferences
   const [vrPreferences, setVrPreferences] = useState({
@@ -209,7 +222,10 @@ export default function TherapistPatientDetail() {
               <p className="text-xs text-slate-500 mt-1 line-clamp-1">Following instructions, group work</p>
             </div>
           </div>
-          <button className="w-full mt-3 py-2 text-purple-600 hover:bg-purple-100 rounded-lg transition-colors text-sm font-medium">
+          <button 
+            onClick={() => setShowScheduleSessionDialog(true)}
+            className="w-full mt-3 py-2 text-purple-600 hover:bg-purple-100 rounded-lg transition-colors text-sm font-medium"
+          >
             + Schedule New Session
           </button>
         </Card>
@@ -426,7 +442,10 @@ export default function TherapistPatientDetail() {
                 ))}
               </div>
               
-              <button className="w-full mt-4 py-2 text-sky-600 hover:bg-sky-50 rounded-lg transition-colors text-sm font-medium">
+              <button 
+                onClick={() => setShowAddTodoDialog(true)}
+                className="w-full mt-4 py-2 text-sky-600 hover:bg-sky-50 rounded-lg transition-colors text-sm font-medium"
+              >
                 + Add Item
               </button>
             </Card>
@@ -480,23 +499,41 @@ export default function TherapistPatientDetail() {
                 ))}
               </div>
 
-              <button className="w-full mt-3 py-1.5 text-amber-600 hover:bg-amber-50 rounded-lg transition-colors text-xs font-medium">
+              <button 
+                onClick={() => setShowAddExerciseDialog(true)}
+                className="w-full mt-3 py-1.5 text-amber-600 hover:bg-amber-50 rounded-lg transition-colors text-xs font-medium"
+              >
                 + Add Exercise
               </button>
             </Card>
 
             {/* Clinical Notes */}
             <Card className="bg-white p-6">
-              <div className="flex items-center gap-2 mb-4">
-                <FileText className="w-5 h-5 text-violet-600" />
-                <h2 className="text-xl text-slate-900 font-semibold">Clinical Notes</h2>
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-2">
+                  <FileText className="w-5 h-5 text-violet-600" />
+                  <h2 className="text-xl text-slate-900 font-semibold">Clinical Notes</h2>
+                </div>
+                <button 
+                  onClick={() => setShowAddNoteDialog(true)}
+                  className="px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-lg transition-colors text-sm font-medium flex items-center gap-2"
+                >
+                  <Plus className="w-4 h-4" />
+                  Add Note
+                </button>
               </div>
               
               <div className="bg-slate-50 rounded-lg p-4 border border-slate-200">
                 <p className="text-slate-700 leading-relaxed whitespace-pre-line">{currentSession.clinicalNotes}</p>
               </div>
 
-              <button className="w-full mt-4 py-2 text-violet-600 hover:bg-violet-50 rounded-lg transition-colors text-sm font-medium">
+              <button 
+                onClick={() => {
+                  setEditingNote(currentSession.clinicalNotes);
+                  setShowEditNoteDialog(true);
+                }}
+                className="w-full mt-4 py-2 text-violet-600 hover:bg-violet-50 rounded-lg transition-colors text-sm font-medium"
+              >
                 Edit Notes
               </button>
             </Card>
@@ -514,7 +551,12 @@ export default function TherapistPatientDetail() {
                   View AI Insights
                 </button>
                 
-                <button className="w-full py-3 px-4 bg-slate-50 hover:bg-slate-100 text-slate-900 rounded-lg transition-colors text-left flex items-center gap-3">
+                <button 
+                  onClick={() => {
+                    alert('Generating comprehensive report for ' + patientData.name + '\n\nReport will include:\n- Session summaries\n- Progress metrics\n- Clinical notes\n- Recommendations\n\nReport will be downloaded as PDF.');
+                  }}
+                  className="w-full py-3 px-4 bg-slate-50 hover:bg-slate-100 text-slate-900 rounded-lg transition-colors text-left flex items-center gap-3"
+                >
                   <ClipboardList className="w-5 h-5" />
                   Generate Report
                 </button>
@@ -738,6 +780,275 @@ export default function TherapistPatientDetail() {
                   className="flex-1 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg transition-colors font-medium"
                 >
                   Add Task
+                </button>
+              </div>
+            </Card>
+          </div>
+        )}
+
+        {/* Add Clinical Note Dialog */}
+        {showAddNoteDialog && (
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+            <Card className="bg-white p-6 max-w-2xl w-full">
+              <h3 className="text-xl font-semibold text-slate-900 mb-4">Add Clinical Note</h3>
+              
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                    Clinical Note
+                  </label>
+                  <textarea 
+                    value={newClinicalNote}
+                    onChange={(e) => setNewClinicalNote(e.target.value)}
+                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 min-h-[200px] resize-none"
+                    placeholder="Enter clinical observations, progress notes, recommendations, or any relevant information about the session..."
+                  />
+                  <p className="text-xs text-slate-500 mt-2">
+                    Session: {currentSession.scene} - {currentSession.date}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-3 mt-6">
+                <button
+                  onClick={() => {
+                    setShowAddNoteDialog(false);
+                    setNewClinicalNote('');
+                  }}
+                  className="flex-1 px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg transition-colors font-medium"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={() => {
+                    // Here you would typically save the note to the backend
+                    console.log('Saving clinical note:', newClinicalNote);
+                    alert('Clinical note added successfully!');
+                    setShowAddNoteDialog(false);
+                    setNewClinicalNote('');
+                  }}
+                  className="flex-1 px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-lg transition-colors font-medium"
+                >
+                  Save Note
+                </button>
+              </div>
+            </Card>
+          </div>
+        )}
+
+        {/* Schedule Session Dialog */}
+        {showScheduleSessionDialog && (
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+            <Card className="bg-white p-6 max-w-md w-full">
+              <h3 className="text-xl font-semibold text-slate-900 mb-4">Schedule New Session</h3>
+              
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">Session Date</label>
+                  <input 
+                    type="date"
+                    value={newSession.date}
+                    onChange={(e) => setNewSession({...newSession, date: e.target.value})}
+                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">VR Scene</label>
+                  <select 
+                    value={newSession.scene}
+                    onChange={(e) => setNewSession({...newSession, scene: e.target.value})}
+                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                  >
+                    <option value="">Select a scene</option>
+                    <option value="Grocery Store">Grocery Store</option>
+                    <option value="Street Crossing">Street Crossing</option>
+                    <option value="Restaurant">Restaurant</option>
+                    <option value="Playground">Playground</option>
+                    <option value="Classroom">School Classroom</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">Description (Optional)</label>
+                  <textarea 
+                    value={newSession.description}
+                    onChange={(e) => setNewSession({...newSession, description: e.target.value})}
+                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 min-h-[80px] resize-none"
+                    placeholder="Enter session goals or notes..."
+                  />
+                </div>
+              </div>
+
+              <div className="flex gap-3 mt-6">
+                <button
+                  onClick={() => {
+                    setShowScheduleSessionDialog(false);
+                    setNewSession({ date: '', scene: '', description: '' });
+                  }}
+                  className="flex-1 px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg transition-colors font-medium"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={() => {
+                    console.log('Scheduling session:', newSession);
+                    alert('Session scheduled successfully for ' + newSession.date);
+                    setShowScheduleSessionDialog(false);
+                    setNewSession({ date: '', scene: '', description: '' });
+                  }}
+                  className="flex-1 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors font-medium"
+                >
+                  Schedule
+                </button>
+              </div>
+            </Card>
+          </div>
+        )}
+
+        {/* Add To-Do Item Dialog */}
+        {showAddTodoDialog && (
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+            <Card className="bg-white p-6 max-w-md w-full">
+              <h3 className="text-xl font-semibold text-slate-900 mb-4">Add To-Do Item</h3>
+              
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">Task Description</label>
+                  <input 
+                    type="text"
+                    value={newTodoItem}
+                    onChange={(e) => setNewTodoItem(e.target.value)}
+                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
+                    placeholder="Enter task to prepare for session..."
+                  />
+                </div>
+              </div>
+
+              <div className="flex gap-3 mt-6">
+                <button
+                  onClick={() => {
+                    setShowAddTodoDialog(false);
+                    setNewTodoItem('');
+                  }}
+                  className="flex-1 px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg transition-colors font-medium"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={() => {
+                    console.log('Adding todo item:', newTodoItem);
+                    alert('To-Do item added successfully!');
+                    setShowAddTodoDialog(false);
+                    setNewTodoItem('');
+                  }}
+                  className="flex-1 px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white rounded-lg transition-colors font-medium"
+                >
+                  Add Item
+                </button>
+              </div>
+            </Card>
+          </div>
+        )}
+
+        {/* Add Exercise Dialog */}
+        {showAddExerciseDialog && (
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+            <Card className="bg-white p-6 max-w-md w-full">
+              <h3 className="text-xl font-semibold text-slate-900 mb-4">Add Home Practice Exercise</h3>
+              
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">Exercise Description</label>
+                  <input 
+                    type="text"
+                    value={newExercise.title}
+                    onChange={(e) => setNewExercise({...newExercise, title: e.target.value})}
+                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                    placeholder="e.g., Practice greeting phrases"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">Duration</label>
+                  <input 
+                    type="text"
+                    value={newExercise.duration}
+                    onChange={(e) => setNewExercise({...newExercise, duration: e.target.value})}
+                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                    placeholder="e.g., 10 min"
+                  />
+                </div>
+              </div>
+
+              <div className="flex gap-3 mt-6">
+                <button
+                  onClick={() => {
+                    setShowAddExerciseDialog(false);
+                    setNewExercise({ title: '', duration: '' });
+                  }}
+                  className="flex-1 px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg transition-colors font-medium"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={() => {
+                    console.log('Adding exercise:', newExercise);
+                    alert('Home practice exercise added successfully!');
+                    setShowAddExerciseDialog(false);
+                    setNewExercise({ title: '', duration: '' });
+                  }}
+                  className="flex-1 px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-lg transition-colors font-medium"
+                >
+                  Add Exercise
+                </button>
+              </div>
+            </Card>
+          </div>
+        )}
+
+        {/* Edit Notes Dialog */}
+        {showEditNoteDialog && (
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+            <Card className="bg-white p-6 max-w-2xl w-full">
+              <h3 className="text-xl font-semibold text-slate-900 mb-4">Edit Clinical Notes</h3>
+              
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                    Clinical Notes
+                  </label>
+                  <textarea 
+                    value={editingNote}
+                    onChange={(e) => setEditingNote(e.target.value)}
+                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 min-h-[200px] resize-none"
+                    placeholder="Edit clinical notes..."
+                  />
+                  <p className="text-xs text-slate-500 mt-2">
+                    Session: {currentSession.scene} - {currentSession.date}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-3 mt-6">
+                <button
+                  onClick={() => {
+                    setShowEditNoteDialog(false);
+                    setEditingNote('');
+                  }}
+                  className="flex-1 px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg transition-colors font-medium"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={() => {
+                    console.log('Updating clinical note:', editingNote);
+                    alert('Clinical notes updated successfully!');
+                    setShowEditNoteDialog(false);
+                    setEditingNote('');
+                  }}
+                  className="flex-1 px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-lg transition-colors font-medium"
+                >
+                  Save Changes
                 </button>
               </div>
             </Card>

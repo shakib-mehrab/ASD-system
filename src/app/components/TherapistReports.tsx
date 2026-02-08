@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { ArrowLeft, TrendingUp, Calendar, FileText, Award, Target, Download } from 'lucide-react';
 // import DemoNav from '@/app/components/DemoNav';
 import { DashboardLayout } from './DashboardLayout';
+import { Card } from './ui/card';
 
 const sessionData = [
   { date: 'Jan 1', completion: 45, accuracy: 72, engagement: 68 },
@@ -15,6 +17,12 @@ const sessionData = [
 
 export default function TherapistReports() {
   const navigate = useNavigate();
+  const [showDateRangeDialog, setShowDateRangeDialog] = useState(false);
+  const [showAddNoteDialog, setShowAddNoteDialog] = useState(false);
+  const [showEditNoteDialog, setShowEditNoteDialog] = useState(false);
+  const [dateRange, setDateRange] = useState({ start: '', end: '' });
+  const [newNote, setNewNote] = useState('');
+  const [editNote, setEditNote] = useState('');
 
   return (
     <DashboardLayout>
@@ -35,11 +43,19 @@ export default function TherapistReports() {
           </div>
 
           <div className="flex gap-3">
-            <button className="px-5 py-3 bg-white hover:bg-slate-50 border-2 border-slate-200 rounded-xl transition-all flex items-center gap-2">
+            <button 
+              onClick={() => setShowDateRangeDialog(true)}
+              className="px-5 py-3 bg-white hover:bg-slate-50 border-2 border-slate-200 rounded-xl transition-all flex items-center gap-2"
+            >
               <Calendar className="w-5 h-5" />
               Date Range
             </button>
-            <button className="px-5 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl transition-all flex items-center gap-2">
+            <button 
+              onClick={() => {
+                alert('Exporting report as PDF...\n\nReport includes:\n- Performance trends\n- Session summaries\n- Clinical notes\n- Progress metrics\n\nDownload will start shortly.');
+              }}
+              className="px-5 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl transition-all flex items-center gap-2"
+            >
               <Download className="w-5 h-5" />
               Export Report
             </button>
@@ -234,7 +250,15 @@ export default function TherapistReports() {
             <div className="p-4 bg-slate-50 rounded-xl">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm text-slate-500">Jan 15, 2026 - Dr. Smith</span>
-                <button className="text-sm text-sky-600 hover:text-sky-700">Edit</button>
+                <button 
+                  onClick={() => {
+                    setEditNote('Excellent progress in pedestrian safety awareness. Child demonstrated improved attention to traffic signals. Recommend maintaining current difficulty level for 2 more sessions.');
+                    setShowEditNoteDialog(true);
+                  }}
+                  className="text-sm text-sky-600 hover:text-sky-700"
+                >
+                  Edit
+                </button>
               </div>
               <p className="text-slate-700">
                 Excellent progress in pedestrian safety awareness. Child demonstrated improved attention 
@@ -242,11 +266,159 @@ export default function TherapistReports() {
               </p>
             </div>
             
-            <button className="w-full py-3 text-emerald-600 hover:bg-emerald-50 rounded-xl transition-colors">
+            <button 
+              onClick={() => setShowAddNoteDialog(true)}
+              className="w-full py-3 text-emerald-600 hover:bg-emerald-50 rounded-xl transition-colors"
+            >
               + Add Clinical Note
             </button>
           </div>
         </div>
+
+        {/* Date Range Dialog */}
+        {showDateRangeDialog && (
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+            <Card className="bg-white p-6 max-w-md w-full">
+              <h3 className="text-xl font-semibold text-slate-900 mb-4">Select Date Range</h3>
+              
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">Start Date</label>
+                  <input 
+                    type="date"
+                    value={dateRange.start}
+                    onChange={(e) => setDateRange({...dateRange, start: e.target.value})}
+                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">End Date</label>
+                  <input 
+                    type="date"
+                    value={dateRange.end}
+                    onChange={(e) => setDateRange({...dateRange, end: e.target.value})}
+                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                  />
+                </div>
+              </div>
+
+              <div className="flex gap-3 mt-6">
+                <button
+                  onClick={() => {
+                    setShowDateRangeDialog(false);
+                    setDateRange({ start: '', end: '' });
+                  }}
+                  className="flex-1 px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg transition-colors font-medium"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={() => {
+                    console.log('Applying date range:', dateRange);
+                    alert('Date range applied: ' + dateRange.start + ' to ' + dateRange.end);
+                    setShowDateRangeDialog(false);
+                  }}
+                  className="flex-1 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg transition-colors font-medium"
+                >
+                  Apply
+                </button>
+              </div>
+            </Card>
+          </div>
+        )}
+
+        {/* Add Clinical Note Dialog */}
+        {showAddNoteDialog && (
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+            <Card className="bg-white p-6 max-w-2xl w-full">
+              <h3 className="text-xl font-semibold text-slate-900 mb-4">Add Clinical Note</h3>
+              
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                    Clinical Note
+                  </label>
+                  <textarea 
+                    value={newNote}
+                    onChange={(e) => setNewNote(e.target.value)}
+                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 min-h-[200px] resize-none"
+                    placeholder="Enter clinical observations, progress notes, recommendations, or any relevant information..."
+                  />
+                </div>
+              </div>
+
+              <div className="flex gap-3 mt-6">
+                <button
+                  onClick={() => {
+                    setShowAddNoteDialog(false);
+                    setNewNote('');
+                  }}
+                  className="flex-1 px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg transition-colors font-medium"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={() => {
+                    console.log('Adding clinical note:', newNote);
+                    alert('Clinical note added successfully!');
+                    setShowAddNoteDialog(false);
+                    setNewNote('');
+                  }}
+                  className="flex-1 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg transition-colors font-medium"
+                >
+                  Save Note
+                </button>
+              </div>
+            </Card>
+          </div>
+        )}
+
+        {/* Edit Clinical Note Dialog */}
+        {showEditNoteDialog && (
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+            <Card className="bg-white p-6 max-w-2xl w-full">
+              <h3 className="text-xl font-semibold text-slate-900 mb-4">Edit Clinical Note</h3>
+              
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                    Clinical Note
+                  </label>
+                  <textarea 
+                    value={editNote}
+                    onChange={(e) => setEditNote(e.target.value)}
+                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 min-h-[200px] resize-none"
+                    placeholder="Edit clinical note..."
+                  />
+                </div>
+              </div>
+
+              <div className="flex gap-3 mt-6">
+                <button
+                  onClick={() => {
+                    setShowEditNoteDialog(false);
+                    setEditNote('');
+                  }}
+                  className="flex-1 px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg transition-colors font-medium"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={() => {
+                    console.log('Updating clinical note:', editNote);
+                    alert('Clinical note updated successfully!');
+                    setShowEditNoteDialog(false);
+                    setEditNote('');
+                  }}
+                  className="flex-1 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg transition-colors font-medium"
+                >
+                  Save Changes
+                </button>
+              </div>
+            </Card>
+          </div>
+        )}
       </div>
     </DashboardLayout>
   );

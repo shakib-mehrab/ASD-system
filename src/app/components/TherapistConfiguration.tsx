@@ -202,7 +202,12 @@ export default function TherapistConfiguration() {
             >
               Cancel
             </button>
-            <button className="px-6 py-3 bg-slate-600 hover:bg-slate-700 text-white rounded-xl transition-all">
+            <button 
+              onClick={() => {
+                alert('VR Configuration saved successfully!\\n\\nSettings have been applied and will be used in the next session.');
+              }}
+              className="px-6 py-3 bg-slate-600 hover:bg-slate-700 text-white rounded-xl transition-all"
+            >
               Save Configuration
             </button>
             <button
